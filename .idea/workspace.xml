@@ -18,7 +18,9 @@
         <entry file="file://$PROJECT_DIR$/exchange-admin/wallet_datebase_change.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="-579" />
+              <first_editor relative-caret-position="441">
+                <caret line="34" column="3" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
+              </first_editor>
               <second_editor />
             </state>
           </provider>
@@ -160,15 +162,16 @@
       <updated>1541732281125</updated>
       <workItem from="1541732282284" duration="72000" />
       <workItem from="1541732360080" duration="56000" />
-      <workItem from="1541732427912" duration="1017000" />
+      <workItem from="1541732427912" duration="1349000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1145000" />
+    <option name="totallyTimeSpent" value="1477000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="61" y="46" width="1725" height="925" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -230,7 +233,9 @@
     <entry file="file://$PROJECT_DIR$/exchange-admin/wallet_datebase_change.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="-579" />
+          <first_editor relative-caret-position="441">
+            <caret line="34" column="3" lean-forward="true" selection-start-line="34" selection-start-column="3" selection-end-line="34" selection-end-column="3" />
+          </first_editor>
           <second_editor />
         </state>
       </provider>
