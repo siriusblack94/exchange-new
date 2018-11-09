@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.CoinRechargeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.CoinRecharge">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="coin_type" property="coinType"/>
+        <result column="address" property="address"/>
+        <result column="confirm" property="confirm"/>
+        <result column="status" property="status"/>
+        <result column="txid" property="txid"/>
+        <result column="amount" property="amount"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <resultMap id="BaseDTOMap" type="com.blockeng.admin.dto.CoinRechargeDTO" extends="BaseResultMap">
+        <result column="username" property="username"/>
+        <result column="real_name" property="realName"/>
+        <result column="mobile" property="mobile"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        user_id AS userId,
+        user_name AS userName,
+        coin_id AS coinId,
+        coin_name AS coinName,
+        coin_type AS coinType,
+        address,
+        `status`,
+        confirm,
+        txid,
+        amount,
+        last_update_time AS lastUpdateTime,
+        created
+    </sql>
+
+    <sql id="params">
+        <if test=" userId !=null and userId!='' ">
+            and w.user_id=#{userId}
+        </if>
+        <if test=" userName !=null and userName!='' ">
+            and u.username LIKE CONCAT('%',#{userName}, '%')
+        </if>
+        <if test=" mobile !=null and mobile!='' ">
+            and u.mobile LIKE CONCAT('%',#{mobile}, '%')
+        </if>
+        <if test=" status !=null and status!='' ">
+            and w.status=#{status}
+        </if>
+        <if test=" coinId !=null and coinId!='' ">
+            and w.coin_id=#{coinId}
+        </if>
+        <if test=" numMin !=null and numMin!='' ">
+            <![CDATA[ and w.amount >= #{numMin} ]]>
+        </if>
+        <if test=" numMax !=null and numMax!='' ">
+            <![CDATA[ and w.amount <= #{numMax} ]]>
+        </if>
+        <if test=" startTime !=null and startTime!='' ">
+            <![CDATA[ and w.created >= #{startTime} ]]>
+        </if>
+        <if test=" endTime !=null and endTime!='' ">
+            <![CDATA[ and w.created <= #{endTime} ]]>
+        </if>
+    </sql>
+    <select id="selectMapPage" resultMap="BaseDTOMap">
+
+        SELECT
+        w.id,
+        w.user_id,
+        w.coin_id,
+        w.coin_name,
+        w.coin_type AS coinType,
+        w.address,
+        w.`status`,
+        w.confirm,
+        w.txid,
+        w.amount,
+        w.last_update_time,
+        w.created,
+        u.username,
+        u.mobile,
+        u.real_name
+        FROM
+        coin_recharge w
+        LEFT JOIN user u ON w.user_id =u.id
+        where 1=1
+        <include refid="params"/>
+        ORDER BY w.created DESC
+
+    </select>
+
+
+    <select id="countByDateAndUidStrs" resultType="java.lang.Integer">
+        SELECT count(0) FROM coin_recharge
+        WHERE DATE_FORMAT(created,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+        AND user_id IN(#{uidStrs})
+        <if test="status > 0 ">
+            AND status = #{status}
+        </if>
+    </select>
+
+
+    <!--充值金额，到账金额，充值币种，充值笔数，充值用户数 ，充值时间 统计-->
+    <select id="selectCountMain" resultType="com.blockeng.admin.dto.CoinRechargeCountDTO">
+        SELECT
+        sum(c.amount) sumAmount,
+        COUNT(c.id) counts,
+        count(DISTINCT c.user_id) userCounts,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        coin_recharge c
+        WHERE
+        1=1
+        <if test=" startTime !=null and startTime!='' ">
+            <![CDATA[ and c.created >= #{startTime} ]]>
+        </if>
+        <if test=" endTime !=null and endTime!='' ">
+            <![CDATA[ and c.created <= #{endTime} ]]>
+        </if>
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d")
+        ORDER BY created DESC
+    </select>
+    <!--成功笔数，充值时间-->
+    <select id="selectValidCounts" resultType="com.blockeng.admin.dto.CoinRechargeCountDTO">
+        SELECT validCounts,created from (
+        SELECT
+        COUNT(c.id) validCounts,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        coin_recharge c
+        WHERE
+        c.`status` = 0
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d")
+        )b
+        WHERE created IN
+        <foreach collection="createds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </select>
+    <!--用户数，用户id，充值时间-->
+    <select id="selectUserCt" resultType="com.blockeng.admin.dto.CoinRechargeCountDTO">
+        SELECT userCt,userId,created from ( SELECT
+        count(c.user_id) userCt,
+        c.user_id as userId,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        coin_recharge c
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d"),
+        c.user_id
+        )b
+        WHERE created IN
+        <foreach collection="createds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectAmountByCoinId" resultType="java.math.BigDecimal">
+      SELECT SUM( `amount`  )  FROM `coin_recharge`  WHERE `coin_id` =#{id} AND `status`=3;
+    </select>
+
+    <select id="selectCoinRechargeGroupCoin" resultType="java.util.HashMap">
+       SELECT c.`coin_id` AS coinId,SUM(c.`amount`) AS amount
+        FROM `coin_recharge` c
+        WHERE c.`user_id` =#{userId}
+        <if test=" status!=null and status!='' ">
+          AND c.`status` =#{status}
+        </if>
+        GROUP BY c.`coin_id`
+    </select>
+
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.UserLoginLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.UserLoginLog">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="client_type" property="clientType"/>
+        <result column="login_ip" property="loginIp"/>
+        <result column="login_address" property="loginAddress"/>
+        <result column="login_time" property="loginTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, client_type AS clientType, login_ip AS loginIp, login_address AS loginAddress, login_time
+        AS loginTime
+    </sql>
+
+    <select id="selectLoginCountPage" resultType="com.blockeng.admin.dto.UserCountLoginDTO">
+        SELECT b.login_date AS login_date
+        FROM (
+        SELECT DATE_FORMAT(login_time, "%Y-%m-%d") AS login_date
+        FROM `user_login_log`
+        GROUP BY DATE_FORMAT(login_time,"%Y-%m-%d")
+        ) AS b
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY b.login_date DESC
+    </select>
+
+    <select id="countloginNumByDate" resultType="java.lang.Integer">
+        SELECT COUNT(0)
+        FROM (
+        select b.user_id from user_login_log b
+        WHERE DATE_FORMAT(login_time,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+        GROUP BY b.user_id
+        ) AS a
+    </select>
+
+    <select id="selectUserIdStrsBydate" resultType="java.lang.String">
+        SELECT group_concat(user_id separator ',') AS id_strs from `user_login_log`
+        WHERE DATE_FORMAT(login_time,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+    </select>
+
+
+</mapper>

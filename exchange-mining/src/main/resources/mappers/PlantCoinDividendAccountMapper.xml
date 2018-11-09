@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.PlantCoinDividendAccountMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.PlantCoinDividendAccount">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="reward_amount" property="rewardAmount"/>
+        <result column="unlock_amount" property="unlockAmount"/>
+        <result column="unlock_date" property="unlockDate"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, coin_name AS coinName, reward_amount AS rewardAmount,
+        unlock_amount as unlockAmount, unlock_date as unlockDate,
+        created,last_update_time as lastUpdateTime
+    </sql>
+
+
+</mapper>

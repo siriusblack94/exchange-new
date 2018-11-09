@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.entity.User">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="username" property="username"/>
+        <result column="country_code" property="countryCode"/>
+        <result column="mobile" property="mobile"/>
+        <result column="password" property="password"/>
+        <result column="paypassword" property="paypassword"/>
+        <result column="paypass_setting" property="paypassSetting"/>
+        <result column="email" property="email"/>
+        <result column="real_name" property="realName"/>
+        <result column="id_card_type" property="idCardType"/>
+        <result column="auth_status" property="authStatus"/>
+        <result column="ga_status" property="gaStatus"/>
+        <result column="ga_secret" property="gaSecret"/>
+        <result column="id_card" property="idCard"/>
+        <result column="level" property="level"/>
+        <result column="authtime" property="authtime"/>
+        <result column="logins" property="logins"/>
+        <result column="status" property="status"/>
+        <result column="invite_code" property="inviteCode"/>
+        <result column="invite_relation" property="inviteRelation"/>
+        <result column="direct_inviteid" property="directInviteid"/>
+        <result column="is_deductible" property="isDeductible"/>
+        <result column="reviews_status" property="reviewsStatus"/>
+        <result column="agent_note" property="agentNote"/>
+        <result column="access_key_id" property="accessKeyId"/>
+        <result column="access_key_secret" property="accessKeySecret"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type, username, country_code AS countryCode, mobile, password, paypassword, paypass_setting AS
+        paypassSetting, email, real_name AS realName, id_card_type AS idCardType, auth_status AS authStatus, ga_status
+        AS gaStatus, ga_secret AS gaSecret, id_card AS idCard, level, authtime, logins, status, invite_code AS
+        inviteCode, invite_relation AS inviteRelation, direct_inviteid AS directInviteid, is_deductible AS isDeductible,
+        reviews_status AS reviewsStatus, agent_note AS agentNote, access_key_id AS accessKeyId, access_key_secret AS
+        accessKeySecret, last_update_time AS lastUpdateTime, created
+    </sql>
+
+    <select id="selectListByInviteId" resultType="com.blockeng.entity.User">
+        select id, type, username, INSERT(mobile, 4, 4, '****') AS mobile, email, real_name , auth_status,CASE
+        auth_status WHEN 1 THEN '初级实名认证' WHEN 2 THEN '高级实名认证' ELSE '未认证' END AS authStatusView,level, authtime, created
+        from user where direct_inviteid = #{userId} order by created DESC
+    </select>
+
+
+    <select id="selectByIdCard" resultMap="BaseResultMap">
+        select * from user where id_card=#{idCard}
+    </select>
+
+    <update id="updateAuthName" parameterType="com.blockeng.entity.User">
+        update user set real_name=#{realName},id_card=#{idCard},id_card_type=#{idCardType},auth_status=1,authtime=now()
+        where id=#{id}
+    </update>
+
+    <update id="updatePassword">
+        update user set password=#{password} where id=#{id}
+    </update>
+
+
+    <update id="updatePayPassword">
+        update user set paypassword=#{payPassword},paypass_setting=1 where id=#{id}
+    </update>
+
+
+    <update id="updatePhone">
+        update user set mobile=#{mobile},country_code=#{countryCode} where id=#{id}
+    </update>
+
+    <update id="updatePassWordByMobile">
+        update user set password=#{password} where mobile=#{mobile}
+    </update>
+
+
+    <update id="updateUserBase">
+        update user set username=#{username},email=#{email},paypassword=#{payPassword},paypass_setting=1 where id=#{id}
+    </update>
+
+    <update id="updateEmail">
+        update user set email=#{email} where id=#{id}
+    </update>
+    <update id="updatePassWordByEmail">
+        update user set password=#{password} where email=#{email}
+    </update>
+
+
+</mapper>

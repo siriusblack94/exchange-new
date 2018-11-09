@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.NoticeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.Notice">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="description" property="description"/>
+        <result column="author" property="author"/>
+        <result column="status" property="status"/>
+        <result column="sort" property="sort"/>
+        <result column="content" property="content"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, title, description, author, status, sort, content, last_update_time AS lastUpdateTime, created
+    </sql>
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.AccountMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.Account">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="status" property="status"/>
+        <result column="balance_amount" property="balanceAmount"/>
+        <result column="freeze_amount" property="freezeAmount"/>
+        <result column="recharge_amount" property="rechargeAmount"/>
+        <result column="withdrawals_amount" property="withdrawalsAmount"/>
+        <result column="net_value" property="netValue"/>
+        <result column="lock_margin" property="lockMargin"/>
+        <result column="float_profit" property="floatProfit"/>
+        <result column="total_profit" property="totalProfit"/>
+        <result column="rec_addr" property="recAddr"/>
+        <result column="version" property="version"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, coin_id AS coinId, status, balance_amount AS balance, freeze_amount AS freezeAmount,
+        recharge_amount AS rechargeAmount, withdrawals_amount AS withdrawalsAmount, net_value AS netValue, lock_margin
+        AS lockMargin, float_profit AS floatProfit, total_profit AS totalProfit, rec_addr AS recAddr, version,
+        last_update_time AS lastUpdateTime, created
+    </sql>
+
+    <update id="addAmount">
+        UPDATE `account` SET balance_amount = balance_amount + #{amount} WHERE id = #{accountId}
+    </update>
+    <select id="selectTotal" resultType="java.math.BigDecimal">
+      SELECT SUM(`balance_amount`)+SUM(`freeze_amount`) as total FROM `account` WHERE `coin_id`  =#{coinId} And `user_id` IN (SELECT `id`  FROM  `user` WHERE flag=0 or flag=1 )
+    </select>
+    <select id="selectListByFlag" resultType="com.blockeng.mining.entity.Account">
+        SELECT a.*  FROM `account` a  JOIN `user` u  on a.`user_id` =u.`id`  WHERE (u.`flag` =0 or u.`flag` =1) AND (a.`balance_amount` >0 or a.`freeze_amount` >0);
+    </select>
+</mapper>

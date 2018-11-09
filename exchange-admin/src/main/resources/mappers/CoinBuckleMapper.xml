@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.CoinBuckleMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.dto.CoinBuckleDTO">
+        <id column="id" property="id"/>
+        <result column="userId" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="description" property="description"/>
+        <result column="coinName" property="coinName"/>
+        <result column="status" property="status"/>
+        <result column="amount" property="amount"/>
+        <result column="type" property="type"/>
+        <result column="created" property="created"/>
+        <result column="auditTime" property="auditTime"/>
+        <result column="reason" property="reason"/>
+    </resultMap>
+
+    <!--<resultMap id="BaseDTOMap" type="com.blockeng.admin.entity.CoinBuckle">-->
+    <!--<result column="username" property="username"/>-->
+    <!--<result column="real_name" property="realName"/>-->
+    <!--<result column="mobile" property="mobile"/>-->
+    <!--</resultMap>-->
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        a.id,
+        b.id AS userId,
+        b.username AS userName,
+        c.name AS coinName,
+        a.type AS type,
+        a.description,
+        a.reason,
+        a.status,
+        a.amount,
+        a.audit_time AS auditTime,
+        a.created,
+        d.audit_user_name AS auditNameFirst,
+        e.audit_user_name AS auditNameSecond
+    </sql>
+
+    <select id="selectDTOList" resultType="com.blockeng.admin.dto.CoinBuckleDTO">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        coin_buckle a
+        LEFT JOIN account acc ON acc.id = a.account_id
+        LEFT JOIN user b ON acc.user_id =b.id
+        LEFT JOIN coin c on acc.coin_id = c.id
+        LEFT JOIN coin_buckle_audit_record d on d.order_id = a.id and d.step = 1
+        LEFT JOIN coin_buckle_audit_record e on e.order_id = a.id and e.step = 2
+        <where>${ew.sqlSegment}</where>
+        ORDER BY a.created DESC
+        limit #{current},#{size}
+    </select>
+
+    <select id="selectListPageCount" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        coin_buckle a
+        LEFT JOIN account acc ON acc.id = a.account_id
+        LEFT JOIN user b ON acc.user_id =b.id
+        LEFT JOIN coin c on acc.coin_id = c.id
+        <where>${ew.sqlSegment}</where>
+    </select>
+
+    <select id="selectSumTotal" resultType="java.math.BigDecimal">
+        select IFNULL(SUM(amount),0) as amount from coin_buckle a
+        left join account d on a.account_id = d.id
+
+        <where>
+            a.status = 3 and a.type = 1
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="selectSubTotal" resultType="java.math.BigDecimal">
+        select IFNULL(SUM(amount),0) as amount from coin_buckle a
+        left join account d on a.account_id = d.id
+        <where>
+            a.status = 3 and a.type = 2
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="selectBuckleAccountCounts" resultType="com.blockeng.admin.dto.BuckleAccountCountDTO">
+        select user_id, IFNULL(c.amount,0) as sumTotal,IFNULL(c.subamount,0) as subTotal, (IFNULL(c.amount ,0)- IFNULL(c.subamount,0)) as total,c.coinName from
+        (
+        select a.amount,b.subamount,a.account_id,a.user_id,a.coinName from
+        (select SUM(IFNULL(amount,0)) as amount ,account_id,d.user_id,e.name as coinName from coin_buckle a
+        left join account d on a.account_id = d.id
+        left join coin e on d.coin_id = e.id
+        <where>a.status= 3 and a.type=1 ${ew.sqlSegment}</where>
+        group by account_id) a
+        left join
+        (select sum(IFNULL(amount,0)) as subamount ,account_id,d.user_id,e.name as coinName from coin_buckle a
+        left join account d on a.account_id = d.id
+        left join coin e on d.coin_id = e.id
+        <where>a.status= 3 and a.type=2 ${ew.sqlSegment}</where>
+        group by account_id) b
+        on a.account_id = b.account_id
+        union
+        select a.amount,b.subamount,a.account_id,b.user_id, b.coinName from
+        (select sum(IFNULL(amount,0)) as amount ,account_id,d.user_id,e.name as coinName from coin_buckle a
+        left join account d on a.account_id = d.id
+        left join coin e on d.coin_id = e.id
+        <where>a.status= 3 and a.type=1 ${ew.sqlSegment}</where>
+        group by account_id) a
+        right join
+        (select sum(IFNULL(amount,0)) as subamount ,account_id,d.user_id,e.name as coinName from coin_buckle a
+        left join account d on a.account_id = d.id
+        left join coin e on d.coin_id = e.id
+        <where>a.status= 3 and a.type=2 ${ew.sqlSegment}</where>
+        group by
+        account_id) b
+        on a.account_id = b.account_id
+        where a.account_id is null
+        ) c
+    </select>
+
+
+    <select id="selectBuckleAccountCountsTotal" resultType="java.lang.Integer">
+        select count(1) from
+        (
+            select user_id,c.amount as sumTotal,c.subamount as subTotal, (c.amount - c.subamount) as total from
+            (
+            select a.amount,b.subamount,a.account_id,a.user_id from
+            (select SUM(IFNULL(amount,0)) as amount ,account_id,d.user_id from coin_buckle a
+            left join account d on a.account_id = d.id
+            left join coin e on d.coin_id = e.id
+            <where>a.status= 3 and a.type=1 ${ew.sqlSegment}</where>
+            group by account_id) a
+            left join
+            (select sum(IFNULL(amount,0)) as subamount ,account_id,d.user_id from coin_buckle a
+            left join account d on a.account_id = d.id
+            left join coin e on d.coin_id = e.id
+            <where>a.status= 3 and a.type=2 ${ew.sqlSegment}</where>
+            group by account_id) b
+            on a.account_id = b.account_id
+            union
+            select a.amount,b.subamount,a.account_id,a.user_id from
+            (select sum(IFNULL(amount,0)) as amount ,account_id,d.user_id from coin_buckle a
+            left join account d on a.account_id = d.id
+            left join coin e on d.coin_id = e.id
+            <where>a.status= 3 and a.type=1 ${ew.sqlSegment}</where>
+            group by account_id) a
+            right join
+            (select sum(IFNULL(amount,0)) as subamount ,account_id,d.user_id from coin_buckle a
+            left join account d on a.account_id = d.id
+            left join coin e on d.coin_id = e.id
+            <where>a.status= 3 and a.type=2 ${ew.sqlSegment}</where>
+            group by
+            account_id) b
+            on a.account_id = b.account_id
+            where a.account_id is null
+            ) c
+        ) f
+    </select>
+
+    <select id="selectBuckleFreeze" resultType="com.blockeng.admin.entity.AccountFreeze">
+         SELECT
+         u.flag AS userFlag,SUM(c.amount) AS freeze
+         FROM
+         coin_buckle c
+         LEFT JOIN account a ON a.id=c.account_id
+         LEFT JOIN user u ON a.user_id=u.id
+         WHERE a.coin_id=#{coinId}
+         AND c.status in (0,1)
+         AND c.type=2
+         <if test=" userFlag!=null and userFlag!='' ">
+             AND u.flag in (#{userFlag})
+         </if>
+         GROUP by u.flag
+    </select>
+
+    <select id="selectCoinBuckleGroupCoin" resultType="java.util.HashMap">
+        SELECT a.`coin_id` AS coinId,SUM(c.`amount`) AS amount
+        FROM `coin_buckle` c
+        LEFT JOIN `account` a
+        ON c.`account_id`=a.`id`
+        WHERE a.user_id=#{userId}
+        AND c.`status`=#{status}
+        AND c.`type`=#{type}
+        GROUP BY a.`coin_id`
+    </select>
+
+    <select id="selectCoinBuckleFreezeGroupCoin" resultType="java.util.HashMap">
+        SELECT a.`coin_id` AS coinId,SUM(c.`amount`) AS amount
+        FROM `coin_buckle` c
+        LEFT JOIN `account` a
+        ON c.`account_id`=a.`id`
+        WHERE a.`user_id`=#{userId}
+        AND c.`status`=#{status}
+        AND c.`type`=#{type}
+        GROUP BY a.`coin_id`
+    </select>
+</mapper>

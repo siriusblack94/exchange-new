@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.MinePoolMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.MinePool">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="desc" property="description"/>
+        <result column="create_user" property="createUser"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, desc,create_user as createUser,status,remark,created,last_update_time as lastUpdateTime
+    </sql>
+
+
+</mapper>

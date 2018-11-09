@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.DividendRecordDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.dto.DividendRecordDetailDTO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="refe_user_id" property="refeUserId"/>
+        <result column="invite_amount" property="inviteAmount"/>
+        <result column="reward_date" property="rewardDate"/>
+        <result column="created" property="created"/>
+        <result column="enable" property="enable"/>
+        <result column="mark" property="mark"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="real_name" property="realName"/>
+        <result column="username" property="username"/>
+    </resultMap>
+    <select id="selectListPage" resultMap="BaseResultMap">
+        select u.username,u.mobile,u.real_name,u.email,d.user_id,d.reward_date,
+        d.invite_amount,d.refe_user_id,d.created,d.enable,d.mark
+        from dividend_record_detail d
+        LEFT JOIN `user` u on d.refe_user_id=u.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+
+    </select>
+
+
+</mapper>

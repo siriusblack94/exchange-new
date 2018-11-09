@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.PrivatePlacementMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.PrivatePlacement">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="amount" property="amount"/>
+        <result column="freeze_amount" property="freezeAmount"/>
+        <result column="release_amount" property="releaseAmount"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id , amount ,freeze_amount ,release_amount,created,last_update_time
+    </sql>
+    <!--<select id="searchListPage" resultMap="BaseResultMap">-->
+        <!--SELECT-->
+        <!--<include refid="Base_Column_DTO"/>-->
+        <!--FROM PrivatePlacement -->
+    <!--</select>-->
+    <select id="totalAmount" resultType="java.math.BigDecimal">
+        select sum(amount) from private_placement
+    </select>
+
+    <select id="totalReleaseAmount" resultType="java.math.BigDecimal">
+        select sum(release_amount) from private_placement
+    </select>
+
+</mapper>

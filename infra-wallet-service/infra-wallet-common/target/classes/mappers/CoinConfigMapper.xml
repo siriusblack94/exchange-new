@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.wallet.mapper.CoinConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.wallet.entity.CoinConfig">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="coin_type" property="coinType"/>
+        <result column="credit_limit" property="creditLimit"/>
+        <result column="credit_max_limit" property="creditMaxLimit"/>
+        <result column="auto_recharge" property="autoRecharge"/>
+        <result column="auto_draw" property="autoDraw"/>
+        <result column="auto_collect" property="autoCollect"/>
+        <result column="auto_address" property="autoAddress"/>
+        <result column="rpc_ip" property="rpcIp"/>
+        <result column="rpc_port" property="rpcPort"/>
+        <result column="rpc_user" property="rpcUser"/>
+        <result column="rpc_pwd" property="rpcPwd"/>
+        <result column="rpc_ip_out" property="rpcIpOut"/>
+        <result column="rpc_port_out" property="rpcPortOut"/>
+        <result column="rpc_user_out" property="rpcUserOut"/>
+        <result column="rpc_pwd_out" property="rpcPwdOut"/>
+        <result column="last_block" property="lastBlock"/>
+        <result column="wallet_user" property="walletUser"/>
+        <result column="wallet_pass" property="walletPass"/>
+        <result column="wallet_user_out" property="walletUserOut"/>
+        <result column="wallet_pass_out" property="walletPassOut"/>
+        <result column="contract_address" property="contractAddress"/>
+        <result column="min_confirm" property="minConfirm"/>
+        <result column="task" property="task"/>
+        <result column="status" property="status"/>
+        <result column="context" property="context"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, coin_type AS coinType,credit_limit AS creditLimit, credit_max_limit AS creditMaxLimit,
+        auto_recharge AS autoRecharge,auto_draw AS autoDraw,auto_collect AS autoCollect,auto_address AS autoAddress,
+        rpc_ip AS rpcIp,rpc_port AS rpcPort, rpc_user AS rpcUser, rpc_pwd AS rpcPwd,
+         rpc_ip_out as rpcIpOut,rpc_port_out as rpcPortOut,rpc_user_out as rpcUserOut,
+         rpc_pwd_out as rpcPwdOut,
+         wallet_user AS walletUser,
+         wallet_user_out AS walletUserOut,
+         wallet_pass_out AS walletPassOut,
+         last_block AS lastBlock,
+        contract_address AS contractAddress, min_confirm AS minConfirm, wallet_pass AS walletPass,task, status
+    </sql>
+
+</mapper>

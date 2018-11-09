@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.wallet.mapper.CoinWithdrawMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.wallet.entity.CoinWithdraw">
+        <id column="id" property="id"/>
+        <!--<result column="apply_id" property="applyId"/>-->
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="coin_type" property="coinType"/>
+        <result column="address" property="address"/>
+        <result column="status" property="status"/>
+        <result column="txid" property="txid"/>
+        <result column="num" property="num"/>
+        <result column="fee" property="fee"/>
+        <result column="mum" property="mum"/>
+        <result column="type" property="type"/>
+        <result column="chain_fee" property="chainFee"/>
+        <result column="block_num" property="blockNum"/>
+        <result column="remark" property="remark"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+    <!--apply_id AS applyId,-->
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, apply_id AS applyId, user_id AS userId, coin_id AS coinId, coin_name AS coinName, coin_type AS coinType,
+        address, status, txid, num, fee, mum, type,chain_fee AS chainFee ,block_num AS blockNum, remark,last_update_time
+        AS lastUpdateTime, created
+    </sql>
+</mapper>

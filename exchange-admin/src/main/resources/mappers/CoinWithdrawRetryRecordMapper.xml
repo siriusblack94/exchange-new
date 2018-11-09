@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.CoinWithdrawRetryRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.dto.CoinWithdrawRetryRecordDTO">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="address" property="address"/>
+        <result column="txid" property="txid"/>
+        <result column="num" property="num"/>
+        <result column="fee" property="fee"/>
+        <result column="mum" property="mum"/>
+        <result column="type" property="type"/>
+        <result column="remark" property="remark"/>
+        <result column="audit_user_name" property="auditUserName"/>
+        <result column="audit_user_id" property="auditUserId"/>
+        <result column="created" property="created"/>
+        <result column="mobile" property="mobile"/>
+        <result column="step" property="step"/>
+    </resultMap>
+
+    <sql id="Page_Column_List">
+        b.username as userName,
+        b.mobile,
+        a.id,
+        a.user_id as userId,
+        a.order_id as orderId,
+        a.coin_id as coinId,
+        a.coin_name as coinName,
+        a.address,
+        a.txid,
+        a.num,
+        a.fee,
+        a.mum,
+        a.type,
+        a.remark,
+        a.created,
+        d.audit_user_id as auditUserId,
+        d.audit_user_name as auditUserName,
+        d.step
+    </sql>
+
+
+    <select id="selectListPage" resultType="com.blockeng.admin.dto.CoinWithdrawRetryRecordDTO">
+        SELECT
+        <include refid="Page_Column_List"/>
+        FROM coin_withdraw_retry_record a
+        left JOIN `user` b ON a.user_id = b.id
+        left JOIN `coin_withdraw_audit_record` d ON d.order_id = a.order_id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY a.created DESC
+    </select>
+</mapper>

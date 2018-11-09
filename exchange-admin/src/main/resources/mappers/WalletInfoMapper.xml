@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.WalletInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.WalletInfo">
+        <id column="id" property="id"/>
+        <result column="coinId" property="coinId"/>
+        <result column="name" property="name"/>
+        <result column="balance_total" property="balanceTotal"/>
+        <result column="wallet_user_count" property="walletUserCount"/>
+        <result column="user_count" property="userCount"/>
+        <result column="coin_recharge_amount" property="coinRechargeAmount"/>
+        <result column="coin_withdraw_amount" property="coinWithdrawAmount"/>
+        <result column="balance_total_in" property="balanceTotalIn"/>
+        <result column="balance_total_out" property="balanceTotalOut"/>
+        <result column="created" property="created"/>
+        <result column="date" property="date"/>
+    </resultMap>
+
+
+</mapper>

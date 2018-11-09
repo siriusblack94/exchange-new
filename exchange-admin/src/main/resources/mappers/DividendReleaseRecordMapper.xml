@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.DividendReleaseRecordMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.DividendReleaseRecord">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="week_lock" property="weekLock"/>
+        <result column="pri_week_total_mine" property="priWeekTotalMine"/>
+        <result column="unlock_date" property="unlockDate"/>
+        <result column="unlock_amount" property="unlockAmount"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        d.id, d.user_id ,
+        d.week_lock  , d.pri_week_total_mine ,
+        d.unlock_date  , d.unlock_amount,
+        u.mobile,u.real_name,u.username
+    </sql>
+
+    <resultMap id="selectListResultMap" type="com.blockeng.admin.dto.DividendReleaseRecordDTO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="week_lock" property="weekLock"/>
+        <result column="pri_week_total_mine" property="priWeekTotalMine"/>
+        <result column="unlock_date" property="unlockDate"/>
+        <result column="unlock_amount" property="unlockAmount"/>
+        <result column="mobile" property="mobile"/>
+        <result column="real_name" property="realName"/>
+        <result column="username" property="username"/>
+
+
+    </resultMap>
+
+    <select id="selectReleaseDetailListPage" resultMap="selectListResultMap">
+
+        select
+        <include refid="Base_Column_List"/>
+        from dividend_release_record d
+        left join  user u on d.user_id=u.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY d.unlock_date DESC
+
+
+
+    </select>
+</mapper>

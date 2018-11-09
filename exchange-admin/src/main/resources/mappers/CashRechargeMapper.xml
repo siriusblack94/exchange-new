@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.CashRechargeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.CashRecharge">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="num" property="num"/>
+        <result column="fee" property="fee"/>
+        <result column="feecoin" property="feecoin"/>
+        <result column="mum" property="mum"/>
+        <result column="type" property="type"/>
+        <result column="tradeno" property="tradeno"/>
+        <result column="outtradeno" property="outtradeno"/>
+        <result column="remark" property="remark"/>
+        <result column="audit_remark" property="auditRemark"/>
+        <result column="step" property="step"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+        <result column="last_time" property="lastTime"/>
+    </resultMap>
+
+    <resultMap id="BaseDTOMap" type="com.blockeng.admin.dto.UserCashRechargeDTO" extends="BaseResultMap">
+        <result column="username" property="username"/>
+        <result column="real_name" property="realName"/>
+        <result column="mobile" property="mobile"/>
+        <result column="statusStr" property="statusStr"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, coin_id AS coinId, coin_name AS coinName, num, fee, feecoin, mum, type, tradeno,
+        outtradeno, remark, audit_remark AS auditRemark, step, status, last_update_time AS lastUpdateTime,
+        created,last_time as lastTime
+    </sql>
+
+    <sql id="Base_Column_DTO">
+        c.id,
+        c.user_id,
+        c.coin_id,
+        c.coin_name ,
+        c.num,
+        c.fee,
+        c.feecoin,
+        c.mum,
+        c.type,
+        c.tradeno,
+        c.outtradeno,
+        c.remark,
+        c.audit_remark,
+        c.step,
+        c.status as statusStr,
+        c.status ,
+        c.last_update_time,
+        c.created,
+        c.last_time,
+        u.username ,
+        u.real_name,
+        u.mobile
+    </sql>
+
+
+    <sql id="params">
+        <if test=" userId !=null and userId!='' ">
+            and c.user_id=#{userId}
+        </if>
+        <if test=" userName !=null and userName!='' ">
+            and u.username LIKE CONCAT('%',#{userName}, '%')
+        </if>
+        <if test=" mobile !=null and mobile!='' ">
+            and u.mobile LIKE CONCAT('%',#{mobile}, '%')
+        </if>
+        <if test=" status !=null and status!='' ">
+            and c.status=#{status}
+        </if>
+        <if test=" remarkId !=null and remarkId!='' ">
+            and c.remark=#{remarkId}
+        </if>
+        <if test=" numMin !=null and numMin!='' ">
+            <![CDATA[ and c.num >= #{numMin} ]]>
+        </if>
+        <if test=" numMax !=null and numMax!='' ">
+            <![CDATA[ and c.num <= #{numMax} ]]>
+        </if>
+        <if test=" startTime !=null and startTime!='' ">
+            <![CDATA[ and c.created >= #{startTime} ]]>
+        </if>
+        <if test=" endTime !=null and endTime!='' ">
+            <![CDATA[ and c.created <= #{endTime} ]]>
+        </if>
+    </sql>
+
+    <select id="selectMapPage" resultMap="BaseDTOMap">
+
+        SELECT
+        <include refid="Base_Column_DTO"/>
+        FROM
+        cash_recharge c
+        INNER JOIN `user` u ON c.user_id = u.id
+        where 1=1
+        <include refid="params"/>
+        ORDER BY c.created DESC
+    </select>
+
+    <select id="selectOneObj" resultMap="BaseDTOMap">
+
+        SELECT
+        <include refid="Base_Column_DTO"/>
+        FROM
+        cash_recharge c
+        INNER JOIN `user` u ON c.user_id = u.id
+        where c.id=#{id}
+    </select>
+
+
+    <select id="selectUserCashRechargeDTOList" resultMap="BaseDTOMap">
+
+        SELECT
+        <include refid="Base_Column_DTO"/>
+        FROM
+        cash_recharge c
+        INNER JOIN `user` u ON c.user_id = u.id
+        <if test=" pageSize!=null">
+            LIMIT #{ pageSize}
+        </if>
+    </select>
+
+
+    <!--充值金额，到账金额，充值币种，充值笔数，充值用户数 ，充值时间 统计-->
+    <select id="selectCountMain" resultType="com.blockeng.admin.dto.CashRechargeCountDTO">
+        SELECT
+        sum(c.num) sumNum,
+        sum(c.mum) sumMum,
+        COUNT(c.id) counts,
+        count(DISTINCT c.user_id) userCounts,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        cash_recharge c
+        WHERE
+        1=1
+        <if test=" startTime !=null and startTime!='' ">
+            <![CDATA[ and c.created >= #{startTime} ]]>
+        </if>
+        <if test=" endTime !=null and endTime!='' ">
+            <![CDATA[ and c.created <= #{endTime} ]]>
+        </if>
+        <!-- <if test=" coinId !=null and coinId!='' ">
+             and c.coin_id= #{coinId}
+         </if>-->
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d")
+        ORDER BY created DESC
+    </select>
+    <!--成功笔数，充值时间-->
+    <select id="selectValidCounts" resultType="com.blockeng.admin.dto.CashRechargeCountDTO">
+        SELECT validCounts,created from (
+        SELECT
+        COUNT(c.id) validCounts,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        cash_recharge c
+        WHERE
+        c.`status` = 3
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d")
+        )b
+        WHERE created IN
+        <foreach collection="createds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </select>
+    <!--用户数，用户id，充值时间-->
+    <select id="selectUserCt" resultType="com.blockeng.admin.dto.CashRechargeCountDTO">
+        SELECT userCt,userId,created from ( SELECT
+        count(c.user_id) userCt,
+        c.user_id as userId,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        cash_recharge c
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d"),
+        c.user_id
+        )b
+        WHERE created IN
+        <foreach collection="createds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+    <select id="countByDateAndUidStrs" resultType="java.lang.Integer">
+        SELECT count(0) FROM cash_recharge
+        WHERE DATE_FORMAT(created,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+        AND user_id IN(#{uidStrs})
+        <if test="status > 0 ">
+            AND status = #{status}
+        </if>
+    </select>
+
+    <select id="selectCurbExchangeRechargeStatistics" resultType="com.blockeng.admin.entity.CurbExchangeRechargeStatistics">
+        SELECT
+        c.user_id AS userId,SUM(c.num) AS rechargeAmount,SUM(c.mum) AS transferAmount,COUNT(1) AS rechargeTimes
+        FROM cash_recharge c
+        WHERE status=3
+        AND c.last_update_time BETWEEN #{startTime} AND #{endTime}
+        <if test=" userId!=null and userId!='' ">
+            AND c.user_id=#{userId}
+        </if>
+        GROUP BY c.user_Id
+    </select>
+
+    <select id="countCurbExchangeRecharge" resultType="java.util.HashMap">
+        SELECT
+        SUM(c.num) AS rechargeAmount,SUM(c.mum) AS transferAmount,COUNT(1) AS rechargeTimes,COUNT(DISTINCT(c.user_id)) AS total
+        FROM cash_recharge c
+        WHERE status=3
+        AND c.last_update_time BETWEEN #{startTime} AND #{endTime}
+        <if test=" userId!=null and userId!='' ">
+            AND c.user_id=#{userId}
+        </if>
+    </select>
+
+    <select id="selectCashRecharge" resultType="java.util.HashMap">
+        SELECT c.`coin_id` AS coinId,SUM(c.mum) AS mum
+        FROM `cash_recharge` c
+        WHERE c.`user_id`= #{userId}
+        <if test=" status!=null and status!='' ">
+            AND c.`status`=#{status}
+        </if>
+        GROUP BY c.`coin_id`
+    </select>
+
+</mapper>
+

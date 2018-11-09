@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mapper.CoinWithdrawAuditRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.entity.CoinWithdrawAuditRecord">
+        <id column="id" property="id"/>
+        <result column="order_id" property="orderId"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="step" property="step"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, order_id AS orderId, status, remark, step, created
+    </sql>
+
+</mapper>

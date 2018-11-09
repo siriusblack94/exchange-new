@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mapper.CashWithdrawalsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.entity.CashWithdrawals">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="account_id" property="accountId"/>
+        <result column="num" property="num"/>
+        <result column="fee" property="fee"/>
+        <result column="mum" property="mum"/>
+        <result column="truename" property="truename"/>
+        <result column="bank" property="bank"/>
+        <result column="bank_prov" property="bankProv"/>
+        <result column="bank_city" property="bankCity"/>
+        <result column="bank_addr" property="bankAddr"/>
+        <result column="bank_card" property="bankCard"/>
+        <result column="remark" property="remark"/>
+        <result column="step" property="step"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, coin_id AS coinId, account_id AS accountId, num, fee, mum, truename, bank, bank_prov AS
+        bankProv, bank_city AS bankCity, bank_addr AS bankAddr, bank_card AS bankCard, remark, step, status,
+        last_update_time AS lastUpdateTime, created
+    </sql>
+
+
+    <select id="getTotalByUserId" resultType="java.math.BigDecimal">
+        <![CDATA[
+		select IFNULL(sum(num),0) from cash_withdrawals where user_id = #{userId} and created>=CONCAT(#{dateTime},' 00:00:00')
+		and created < CONCAT(#{dateTime}, ' 23:59:59')
+		]]>
+    </select>
+
+</mapper>

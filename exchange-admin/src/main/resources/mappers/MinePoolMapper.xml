@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.MinePoolMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.MinePool">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="create_user" property="createUser"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <resultMap id="selectListResultMap" type="com.blockeng.admin.dto.MinePoolDTO">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="description" property="description"/>
+        <result column="create_user" property="createUser"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="mobile" property="mobile"/>
+        <result column="real_name" property="realName"/>
+        <result column="username" property="username"/>
+    </resultMap>
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        p.id, p.name, p.description,p.create_user, p.status, p.remark, p.last_update_time ,p.created,
+        u.mobile,u.real_name,u.username
+    </sql>
+    <select id="selectPoolListPage" resultMap="selectListResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from  mine_pool p
+        left join  user u on p.create_user=u.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+
+    </select>
+</mapper>

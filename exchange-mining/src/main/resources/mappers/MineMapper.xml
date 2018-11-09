@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.MineMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.Mine">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="total_mining" property="totalMining"/>
+        <result column="time_mining" property="timeMining"/>
+        <result column="real_mining" property="realMining"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, total_mining AS totalMining,
+        time_mining as timeMining,created,last_update_time as lastUpdateTime
+    </sql>
+
+
+
+
+    <select id="totalMine" resultType="java.math.BigDecimal">
+        select sum(real_mining) as total from mine
+    </select>
+
+
+    <select id="dayTotalMine" resultType="java.math.BigDecimal">
+        select sum(m.real_mining) as total from mine m left join `user` u on m.user_id = u.id where (u.flag=0 or u.flag=1) and time_mining = #{time_mining}
+    </select>
+
+
+    <select id="mineTotal" resultType="java.math.BigDecimal">
+        select sum(`real_mining`) as total from mine
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+
+</mapper>

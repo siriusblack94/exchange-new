@@ -1,0 +1,12 @@
+config-repo/
+target/
+logs/
+!.mvn/wrapper/maven-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+*.log
+ No newline at end of file

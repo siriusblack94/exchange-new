@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.DividendRecordDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.DividendRecordDetail">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="refe_user_id" property="refeUserId"/>
+        <result column="invite_amount" property="inviteAmount"/>
+        <result column="reward_date" property="rewardDate"/>
+        <result column="enable" property="enable"/>
+        <result column="mark" property="mark"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <resultMap id="selectListResultMap" type="com.blockeng.admin.dto.DividendRecordDetailDTO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="refe_user_id" property="refeUserId"/>
+        <result column="invite_amount" property="inviteAmount"/>
+        <result column="reward_date" property="rewardDate"/>
+        <result column="enable" property="enable"/>
+        <result column="mark" property="mark"/>
+        <result column="mobile" property="mobile"/>
+        <result column="real_name" property="realName"/>
+        <result column="username" property="username"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        d.id, d.user_id , d.refe_user_id , d.invite_amount ,
+        d.reward_date  , d.enable,d.mark,d.created,
+        u.mobile,u.real_name,u.username
+    </sql>
+    <select id="selectDetailListPage" resultMap="selectListResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dividend_record_detail d
+        left join  user u on d.refe_user_id=u.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY d.created DESC
+
+    </select>
+</mapper>

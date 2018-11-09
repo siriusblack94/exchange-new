@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.User">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="username" property="username"/>
+        <result column="country_code" property="countryCode"/>
+        <result column="mobile" property="mobile"/>
+        <result column="password" property="password"/>
+        <result column="paypassword" property="paypassword"/>
+        <result column="paypass_setting" property="paypassSetting"/>
+        <result column="email" property="email"/>
+        <result column="real_name" property="realName"/>
+        <result column="id_card_type" property="idCardType"/>
+        <result column="auth_status" property="authStatus"/>
+        <result column="ga_secret" property="gaSecret"/>
+        <result column="id_card" property="idCard"/>
+        <result column="level" property="level"/>
+        <result column="authtime" property="authtime"/>
+        <result column="logins" property="logins"/>
+        <result column="status" property="status"/>
+        <result column="invite_code" property="inviteCode"/>
+        <result column="invite_relation" property="inviteRelation"/>
+        <result column="direct_inviteid" property="directInviteid"/>
+        <result column="is_deductible" property="isDeductible"/>
+        <result column="reviews_status" property="reviewsStatus"/>
+        <result column="agent_note" property="agentNote"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="access_key_id" property="accessKeyId"/>
+        <result column="access_key_secret" property="accessKeySecret"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        type,
+        username,
+        country_code AS countryCode,
+        mobile,
+        PASSWORD,
+        paypassword,
+        paypass_setting AS paypassSetting,
+        email,
+        real_name AS realName,
+        id_card_type AS idCardType,
+        auth_status AS authStatus,
+        ga_secret AS gaSecret,
+        id_card AS idCard,
+        level,
+        authtime,
+        logins,
+        status,
+        invite_code AS inviteCode,
+        invite_relation AS inviteRelation,
+        direct_inviteid AS directInviteid,
+        is_deductible AS isDeductible,
+        reviews_status AS reviewsStatus,
+        agent_note AS agentNote,
+        last_update_time AS lastUpdateTime,
+        access_key_id AS accessKeyId,
+        access_key_secret AS accessKeySecret,
+        created
+    </sql>
+
+    <select id="selectRegCountPage" resultType="com.blockeng.admin.dto.UserCountRegDTO">
+        SELECT b.created AS countDate,
+        COUNT(0) AS regNum
+        FROM (
+        SELECT DATE_FORMAT(created, "%Y-%m-%d") AS created from `user`
+        ) AS b
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY b.created DESC
+    </select>
+
+    <select id="countEmailBindByDate" resultType="java.lang.Integer">
+        SELECT count(0) FROM `user`
+        WHERE DATE_FORMAT(created,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+        and length(email) &gt; 1
+    </select>
+
+    <select id="countSetPayPwdByDate" resultType="java.lang.Integer">
+        SELECT count(0) FROM `user`
+        WHERE DATE_FORMAT(created,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+        and length(paypassword) &gt; 1
+    </select>
+
+    <select id="selectIdStrBydate" resultType="java.lang.String">
+        select group_concat(id separator ',') AS id_strs from `user`
+        WHERE DATE_FORMAT(created,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+    </select>
+
+    <select id="selectBalanceTopPage" resultType="com.blockeng.admin.dto.UserBlanceTopDTO">
+        SELECT a.id AS user_id,
+        IFNULL(
+        (
+        SELECT b.balance_amount FROM `account` b
+        WHERE b.user_id = a.id AND b.coin_id = (
+        SELECT id FROM coin c WHERE c.name = 'BTC'
+        LIMIT 1
+        )
+        ),0) AS btc_amount,
+        IFNULL(
+        (
+        SELECT b.balance_amount FROM `account` b
+        WHERE b.user_id = a.id AND b.coin_id = (
+        SELECT id FROM coin c WHERE c.name = 'ETH'
+        LIMIT 1
+        )
+        ),0) AS eth_amount,
+        IFNULL(
+        (
+        SELECT b.balance_amount FROM `account` b
+        WHERE b.user_id = a.id AND b.coin_id = (
+        SELECT id FROM coin c WHERE c.name = 'LTC'
+        LIMIT 1
+        )
+        ),0) AS ltc_amount,
+        IFNULL(
+        (
+        SELECT b.balance_amount FROM `account` b
+        WHERE b.user_id = a.id AND b.coin_id = (
+        SELECT id FROM coin c WHERE c.name = 'USDT'
+        LIMIT 1
+        )
+        ),0) AS usdt_amount
+        FROM user a
+        <where>
+            1=1
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <!--#持币人数-->
+    <select id="selectUserCount" resultType="com.blockeng.admin.dto.TurnoverOrderCountDTO">
+        SELECT
+        count(a.id) as coinNum,
+        a.coin_id as sellCoinId
+        FROM
+        account a
+        WHERE
+        a.coin_id IN
+        <foreach collection="coins" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY
+        a.coin_id
+    </select>
+
+
+    <select id="selectListPage" resultType="com.blockeng.admin.dto.UserDTO">
+
+        SELECT
+        u.*, (
+        SELECT
+        ua.`status`
+        FROM
+        user_auth_audit_record ua
+        WHERE
+        ua.user_id = u.id
+        ORDER BY
+        ua.created DESC
+        LIMIT 1
+        ) as userAuthStatus
+        FROM
+        `user` u
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY u.created DESC
+    </select>
+
+
+    <select id="selectListAuditPage" resultType="com.blockeng.admin.dto.UserDTO">
+
+        SELECT user1.* ,auth.`remark`,auth.`created` as authCreate,auth.`status` as userAuthStatus
+        FROM (select * from `user` u
+        where u.`refe_auth_id` > 0) AS user1 left join `user_auth_audit_record` auth
+        on user1.`refe_auth_id` = auth.`id`
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY user1.created DESC
+    </select>
+
+
+    <!--<select id="selectListAudit" resultType="com.blockeng.admin.dto.UserDTO">-->
+    <!--SELECT *,auth.`remark`,auth.`created` as authCreate,auth.`status` as userAuthStatus FROM (-->
+    <!--SELECT a.`status`,a.`user_id`,a.`created`,a.`remark`-->
+    <!--FROM `user_auth_audit_record` a-->
+    <!--where a.`created` = (select max(a1.`created`) from `user_auth_audit_record` a1 where a.`user_id` = a1.`user_id` group by a1.`user_id`)-->
+    <!--<if test=" status != null and status!='' ">-->
+    <!--and a.`status` = #{status}-->
+    <!--</if>-->
+    <!--ORDER BY created desc)-->
+    <!--AS auth left join `user` u-->
+    <!--ON auth.`user_id`= u.`id` WHERE-->
+    <!--1=1-->
+    <!--<if test=" userId != null and userId!='' ">-->
+    <!--and u.`id`=#{userId}-->
+    <!--</if>-->
+    <!--<if test=" mobile != null and mobile!='' ">-->
+    <!--AND u.`mobile`=#{mobile}-->
+    <!--</if>-->
+    <!--<if test=" userName != null and userName!='' ">-->
+    <!--AND u.`user_uame`=#{userName}-->
+    <!--</if>-->
+    <!--<if test=" realName != null and realName!='' ">-->
+    <!--AND u.`real_name`=#{realName}-->
+    <!--</if>-->
+    <!--<if test=" startTime != null and startTime!='' and  endTime != null and endTime!='' ">-->
+    <!--between #{startTime} AND #{endTime}-->
+    <!--</if>-->
+    <!--GROUP by auth.`user_id`-->
+    <!--limit #{current},#{end}-->
+
+    <!--</select>-->
+
+    <select id="selectListAuditByUser" resultType="com.blockeng.admin.dto.UserDTO">
+        SELECT * ,auth.`remark`,auth.`created` as authCreate,auth.`status` as userAuthStatus FROM (SELECT * FROM `user`
+        user
+        <where>
+            ${ew.sqlSegment}
+        </where>) AS u
+        LEFT JOIN (
+        SELECT auth1.*
+        FROM `user_auth_audit_record` auth1 LEFT JOIN `user_auth_audit_record` auth2
+        ON (auth1.`user_id` = auth2.`user_id` AND auth1.`id` &lt; auth2.`id`)
+        WHERE auth2.`id` IS NULL
+        )SELECT auth1.*
+        FROM `user_auth_audit_record` auth1 LEFT JOIN `user_auth_audit_record` auth2
+        ON (auth1.`user_id` = auth2.`user_id` AND auth1.`id` &lt; auth2.`id` where auth1.`user_id` = u.`id`
+        ) AS auth ON u.`id` = auth.`user_id`
+    </select>
+
+    <select id="selectListAuditFromAuth" resultType="com.blockeng.admin.dto.UserDTO">
+        SELECT u.* ,auth.`remark`,auth.`created` as authCreate,auth.`status` as userAuthStatus
+        FROM (select * from `user` u
+        where u.`refe_auth_id` > 0) AS u left join `user_auth_audit_record` auth
+        on u.`user_id` = auth.`user_id`
+        <where>
+            ${ew.sqlSegment}
+        </where>
+
+
+        <!--SELECT u.*, auth.`remark`,auth.`created` as authCreate,auth.`status` as userAuthStatus FROM(SELECT auth1.*-->
+        <!--FROM `user_auth_audit_record` auth1 LEFT JOIN `user_auth_audit_record` auth2-->
+        <!--ON auth1.`user_id` = auth2.`user_id`-->
+        <!--<![CDATA[   AND (auth1.`created` < ifnull(auth2.`created`,0))  ]]>-->
+        <!--WHERE auth2.`id` is null-->
+        <!--<if test=" userAuthStatus != null and userAuthStatus !='' ">-->
+        <!--AND auth1.status = #{userAuthStatus}-->
+        <!--</if>-->
+        <!--<if test=" startTime != null and startTime!='' and  endTime != null and endTime!='' ">-->
+        <!--BETWEEN #{startTime} AND #{endTime}-->
+        <!--</if>-->
+        <!--) AS auth LEFT JOIN `user` u-->
+        <!--ON u.`id` = auth.`user_id`-->
+        <!--ORDER BY auth.`created`-->
+        <!--limit #{current},#{end}-->
+    </select>
+
+
+    <select id="selectAuditAccount" resultType="java.lang.Integer">
+        SELECT count(1)
+        FROM `user_auth_audit_record` auth1 LEFT JOIN `user_auth_audit_record` auth2
+        ON auth1.`user_id` = auth2.`user_id` <![CDATA[   AND (auth1.`created` < ifnull(auth2.`created`,0))  ]]>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+
+</mapper>

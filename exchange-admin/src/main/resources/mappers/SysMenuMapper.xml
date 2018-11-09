@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.SysMenuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.SysMenu">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="parent_key" property="parentKey"/>
+        <result column="type" property="type"/>
+        <result column="name" property="name"/>
+        <result column="desc" property="desc"/>
+        <result column="target_url" property="targetUrl"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="create_by" property="createBy"/>
+        <result column="modify_by" property="modifyBy"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, parent_id AS parentId, parent_key AS parentKey, type, name, desc, target_url AS targetUrl, sort, status,
+        create_by AS createBy, modify_by AS modifyBy, created, last_update_time AS lastUpdateTime
+    </sql>
+
+
+    <resultMap id="PrivilegeMenuResultMap" type="com.blockeng.admin.entity.SysMenu">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="parent_key" property="parentKey"/>
+        <result column="type" property="type"/>
+        <result column="name" property="name"/>
+        <result column="desc" property="desc"/>
+        <result column="target_url" property="targetUrl"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="create_by" property="createBy"/>
+        <result column="modify_by" property="modifyBy"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <collection property="privileges" ofType="com.blockeng.admin.entity.SysPrivilege">
+            <id column="privilege.id" property="id"/>
+            <id column="privilege.menu_id" property="menuId"/>
+            <result column="privilege.name" property="name"/>
+            <result column="privilege.description" property="description"/>
+            <result column="privilege.url" property="url"/>
+            <result column="privilege.method" property="method"/>
+            <result column="privilege.created" property="created"/>
+            <result column="privilege.last_update_time" property="lastUpdateTime"/>
+            <result column="privilege.own" property="own"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectPrivilegeMenuList" resultMap="PrivilegeMenuResultMap" parameterType="long">
+        SELECT
+        m.id,
+        m.parent_id AS parentId,
+        m.type,
+        m.NAME,
+        m.DESC,
+        m.target_url AS targetUrl,
+        m.sort,
+        m.STATUS,
+        m.create_by AS createBy,
+        m.modify_by AS modifyBy,
+        m.created,
+        m.last_update_time AS lastUpdateTime,
+        p.id AS `privilege.id`,
+        p.menu_id AS `privilege.menu_id`,
+        p.NAME AS `privilege.name`,
+        p.description AS `privilege.description`,
+        p.url AS `privilege.url`,
+        p.method AS `privilege.method`,
+        p.created AS `privilege.created`,
+        p.last_update_time AS `privilege.last_update_time`,
+        IF
+        ( ( SELECT privilege_id FROM sys_role_privilege WHERE role_id = #{roleId} AND privilege_id = p.id ), 1, 0 )
+        AS `privilege.own`
+        FROM
+        sys_menu AS m
+        LEFT JOIN sys_privilege AS p ON m.id = p.menu_id
+        LEFT JOIN sys_role_privilege AS r ON p.id = r.privilege_id
+        LEFT JOIN sys_user_role AS u ON u.role_id = r.role_id
+        where u.user_id=#{userId}
+        ORDER BY p.id ASC
+    </select>
+
+    <select id="selectListByUserId" resultType="com.blockeng.admin.entity.SysMenu" parameterType="long">
+        SELECT
+        m.id,
+        m.parent_id AS parentId,
+        m.parent_key AS parentKey,
+        m.type,
+        m.name,
+        m.desc,
+        m.target_url AS targetUrl,
+        m.sort,
+        m.status,
+        m.create_by AS createBy,
+        m.modify_by AS modifyBy,
+        m.created,
+        m.last_update_time AS lastUpdateTime
+        FROM
+        sys_user_role AS ur
+        LEFT join sys_role_menu rm on rm.role_id = ur.role_id
+        RIGHT JOIN sys_menu AS m ON m.id = rm.menu_id
+        WHERE
+        ur.user_id = #{userId}
+        GROUP BY m.id
+        ORDER BY m.id ASC
+    </select>
+
+
+    <!--<select id="selectListByUserId" resultType="com.blockeng.admin.entity.SysMenu" parameterType="long">
+        SELECT
+            m.id,
+            m.parent_id AS parentId,
+            m.parent_key AS parentKey,
+            m.type,
+            m.NAME,
+            m.DESC,
+            m.target_url AS targetUrl,
+            m.sort,
+            m.STATUS,
+            m.create_by AS createBy,
+            m.modify_by AS modifyBy,
+            m.created,
+            m.last_update_time AS lastUpdateTime
+        FROM
+            sys_user_role AS ur
+            LEFT JOIN sys_role_privilege AS rp ON rp.role_id = ur.role_id
+            LEFT JOIN sys_privilege AS p ON p.id = rp.privilege_id
+            RIGHT JOIN sys_menu AS m ON m.id = p.menu_id
+        WHERE
+            ur.user_id = #{userId}
+        GROUP BY m.id
+        ORDER BY m.id ASC
+    </select>-->
+</mapper>

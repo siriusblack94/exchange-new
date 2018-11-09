@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.CoinMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.Coin">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="title" property="title"/>
+        <result column="img" property="img"/>
+        <result column="type" property="type"/>
+        <result column="wallet" property="wallet"/>
+        <result column="round" property="round"/>
+
+        <result column="base_amount" property="baseAmount"/>
+        <result column="min_amount" property="minAmount"/>
+        <result column="max_amount" property="maxAmount"/>
+        <result column="day_max_amount" property="dayMaxAmount"/>
+
+        <result column="status" property="status"/>
+        <result column="auto_out" property="autoOut"/>
+        <result column="rate" property="rate"/>
+        <result column="min_fee_num" property="minFeeNum"/>
+        <result column="withdraw_flag" property="withdrawFlag"/>
+        <result column="recharge_flag" property="rechargeFlag"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        name,
+        title,
+        img,
+        type,
+        wallet,
+        round,
+        base_amount AS baseAmount,
+        min_amount AS minAmount,
+        max_amount AS maxAmount,
+        day_max_amount AS dayMaxAmount,
+        status,
+        auto_out AS autoOut,
+        rate,
+        min_fee_num AS minFeeNum,
+        withdraw_flag AS withdrawFlag,
+        recharge_flag AS rechargeFlag,
+        last_update_time AS lastUpdateTime,
+        created
+    </sql>
+
+</mapper>

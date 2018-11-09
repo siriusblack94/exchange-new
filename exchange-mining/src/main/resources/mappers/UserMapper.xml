@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.User">
+        <id column="id" property="id"/>
+        <result column="type" property="type"/>
+        <result column="username" property="username"/>
+        <result column="country_code" property="countryCode"/>
+        <result column="mobile" property="mobile"/>
+        <result column="password" property="password"/>
+        <result column="paypassword" property="paypassword"/>
+        <result column="paypass_setting" property="paypassSetting"/>
+        <result column="email" property="email"/>
+        <result column="real_name" property="realName"/>
+        <result column="id_card_type" property="idCardType"/>
+        <result column="auth_status" property="authStatus"/>
+        <result column="ga_status" property="gaStatus"/>
+        <result column="ga_secret" property="gaSecret"/>
+        <result column="id_card" property="idCard"/>
+        <result column="level" property="level"/>
+        <result column="authtime" property="authtime"/>
+        <result column="logins" property="logins"/>
+        <result column="status" property="status"/>
+        <result column="invite_code" property="inviteCode"/>
+        <result column="invite_relation" property="inviteRelation"/>
+        <result column="direct_inviteid" property="directInviteid"/>
+        <result column="is_deductible" property="isDeductible"/>
+        <result column="reviews_status" property="reviewsStatus"/>
+        <result column="agent_note" property="agentNote"/>
+        <result column="access_key_id" property="accessKeyId"/>
+        <result column="access_key_secret" property="accessKeySecret"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, type, username, country_code AS countryCode, mobile, password, paypassword, paypass_setting AS
+        paypassSetting, email, real_name AS realName, id_card_type AS idCardType, auth_status AS authStatus, ga_status
+        AS gaStatus, ga_secret AS gaSecret, id_card AS idCard, level, authtime, logins, status, invite_code AS
+        inviteCode, invite_relation AS inviteRelation, direct_inviteid AS directInviteid, is_deductible AS isDeductible,
+        reviews_status AS reviewsStatus, agent_note AS agentNote, access_key_id AS accessKeyId, access_key_secret AS
+        accessKeySecret, last_update_time AS lastUpdateTime, created
+    </sql>
+
+    <select id="inviteList" resultType="com.blockeng.mining.entity.User">
+        <![CDATA[
+        select * from `user`
+        where `auth_status`<>0 and (invite_relation is not null and invite_relation !='' or direct_inviteid is NOT null and direct_inviteid !='') and `status` = 1
+        ]]>
+    </select>
+
+    <select id="authStatusList" resultType="com.blockeng.mining.entity.User">
+        select * from `user` u where u.`auth_status`=1 and u.`status` = 1
+    </select>
+
+</mapper>

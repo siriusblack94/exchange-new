@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mapper.CoinTransferMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.entity.CoinTransfer">
+        <id column="id" property="id"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="money_maker_user_id" property="moneyMakerUserId"/>
+        <result column="payee_user_id" property="payeeUserId"/>
+        <result column="num" property="num"/>
+        <result column="status" property="status"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,coin_id AS coinId, money_maker_user_id AS moneyMakerUserId,payee_user_id AS payeeUserId,num,status,created,last_update_time AS lastUpdateTime
+    </sql>
+    <insert id="saveCoinTransfer" parameterType="com.blockeng.entity.CoinTransfer" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        INSERT INTO coin_transfer(coin_id,money_maker_user_id,payee_user_id,num,status,created,last_update_time)
+        VALUES
+        (#{coinId},#{moneyMakerUserId},#{payeeUserId},#{num},#{status},#{created},#{lastUpdateTime})
+    </insert>
+
+    <select id="selectCoinTransferDetail" resultType="com.blockeng.entity.CoinTransfer">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM
+        coin_transfer c
+        WHERE 1=1
+        <if test=" coinId !=null and coinId!='' ">
+            AND c.coin_id=#{coinId}
+        </if>
+        <if test=" startTime !=null and startTime!='' ">
+            <![CDATA[ AND c.created >= #{startTime} ]]>
+        </if>
+        <if test=" endTime !=null and endTime!='' ">
+            <![CDATA[ AND c.created <= #{endTime} ]]>
+        </if>
+        <choose>
+            <when test=" transferMethod !=null and transferMethod =='all'">
+                AND ( c.money_maker_user_id=#{userId} or c.payee_user_id=#{userId} )
+            </when>
+            <when test=" transferMethod!=null and transferMethod == 'out' ">
+                AND c.money_maker_user_id=#{userId}
+            </when>
+            <when test=" transferMethod!=null and transferMethod =='in' ">
+                AND c.payee_user_id=#{userId}
+            </when>
+        </choose>
+    </select>
+</mapper>

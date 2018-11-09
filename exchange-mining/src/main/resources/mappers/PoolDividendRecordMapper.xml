@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.PoolDividendRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.PoolDividendRecord">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="amount" property="amount"/>
+        <result column="reward_date" property="rewardDate"/>
+        <result column="mark" property="mark"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, amount as amount ,
+        reward_date as rewardDate ,mark,created
+    </sql>
+
+
+    <select id="selectTotalUnAcount" resultType="java.math.BigDecimal">
+        SELECT sum(p.`amount`) FROM `pool_dividend_record` p
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+
+</mapper>

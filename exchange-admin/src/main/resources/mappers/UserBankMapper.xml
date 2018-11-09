@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.UserBankMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.UserBank">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="remark" property="remark"/>
+        <result column="real_name" property="realName"/>
+        <result column="bank" property="bank"/>
+        <result column="bank_prov" property="bankProv"/>
+        <result column="bank_city" property="bankCity"/>
+        <result column="bank_addr" property="bankAddr"/>
+        <result column="bank_card" property="bankCard"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <resultMap id="BaseDTOMap" type="com.blockeng.admin.dto.UserBankDTO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="remark" property="remark"/>
+        <result column="real_name" property="realName"/>
+        <result column="bank" property="bank"/>
+        <result column="bank_prov" property="bankProv"/>
+        <result column="bank_city" property="bankCity"/>
+        <result column="bank_addr" property="bankAddr"/>
+        <result column="bank_card" property="bankCard"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+        <result column="mobile" property="mobile"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, remark, real_name AS realName, bank, bank_prov AS bankProv, bank_city AS bankCity,
+        bank_addr AS bankAddr, bank_card AS bankCard, status, last_update_time AS lastUpdateTime, created
+    </sql>
+    <sql id="Base_DTO_Column_List">
+        ub.id,
+        ub.user_id,
+        ub.remark,
+        ub.real_name ,
+        ub.bank,
+        ub.bank_prov ,
+        ub.bank_city ,
+        ub.bank_addr ,
+        ub.bank_card ,
+        ub.`status`,
+        ub.last_update_time ,
+        ub.created,
+        u.mobile
+    </sql>
+    <sql id="params">
+
+        <if test=" realName !=null and realName!='' ">
+            and ub.real_name=#{realName}
+        </if>
+        <if test=" mobile !=null and mobile!='' ">
+            and u.mobile LIKE CONCAT('%',#{mobile}, '%')
+        </if>
+        <if test=" ID !=null and ID!='' ">
+            and ub.user_id=#{ID}
+        </if>
+    </sql>
+    <select id="selectMapPage" resultMap="BaseDTOMap">
+
+        SELECT
+        <include refid="Base_DTO_Column_List"/>
+        FROM
+        user_bank ub
+        LEFT JOIN `user` u ON u.id = ub.user_id
+        where 1=1
+        <include refid="params"/>
+        ORDER BY ub.id DESC
+    </select>
+
+</mapper>

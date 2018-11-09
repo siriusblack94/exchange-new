@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.DividendRecordMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.DividendRecord">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="refe_user_id" property="refeUserId"/>
+        <result column="scale_amount" property="scaleAmount"/>
+        <result column="invite_amount" property="inviteAmount"/>
+        <result column="reward_date" property="rewardDate"/>
+        <result column="enable" property="enable"/>
+        <result column="mark" property="mark"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id , refe_user_id ,
+        scale_amount  , invite_amount ,
+        reward_date  , enable,mark,created
+    </sql>
+
+    <select id="selectListPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from dividend_record
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY created DESC
+    </select>
+
+
+</mapper>

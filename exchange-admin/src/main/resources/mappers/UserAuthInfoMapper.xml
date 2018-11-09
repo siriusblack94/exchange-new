@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.UserAuthInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.UserAuthInfo">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="auth_code" property="authCode"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="serialno" property="serialno"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, auth_code AS authCode ,user_id AS userId, image_url AS imageUrl, serialno, last_update_time AS
+        lastUpdateTime, created
+    </sql>
+
+</mapper>

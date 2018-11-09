@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.TurnoverOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.TurnoverOrder">
+        <id column="id" property="id"/>
+        <result column="market_id" property="marketId"/>
+        <result column="symbol" property="symbol"/>
+        <result column="market_name" property="marketName"/>
+        <result column="trade_type" property="tradeType"/>
+        <result column="sell_user_id" property="sellUserId"/>
+        <result column="sell_coin_id" property="sellCoinId"/>
+        <result column="sell_order_id" property="sellOrderId"/>
+        <result column="sell_price" property="sellPrice"/>
+        <result column="sell_fee_rate" property="sellFeeRate"/>
+        <result column="sell_volume" property="sellVolume"/>
+        <result column="buy_user_id" property="buyUserId"/>
+        <result column="buy_coin_id" property="buyCoinId"/>
+        <result column="buy_order_id" property="buyOrderId"/>
+        <result column="buy_volume" property="buyVolume"/>
+        <result column="buy_price" property="buyPrice"/>
+        <result column="buy_fee_rate" property="buyFeeRate"/>
+        <result column="order_id" property="orderId"/>
+        <result column="amount" property="amount"/>
+        <result column="price" property="price"/>
+        <result column="volume" property="volume"/>
+        <result column="deal_sell_fee" property="dealSellFee"/>
+        <result column="deal_sell_fee_rate" property="dealSellFeeRate"/>
+        <result column="deal_buy_fee" property="dealBuyFee"/>
+        <result column="deal_buy_fee_rate" property="dealBuyFeeRate"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        market_id AS marketId,
+        symbol,
+        market_name AS marketName,
+        trade_type AS tradeType,
+        sell_user_id AS sellUserId,
+        sell_coin_id AS sellCoinId,
+        sell_order_id AS sellOrderId,
+        sell_price AS sellPrice,
+        sell_fee_rate AS sellFeeRate,
+        sell_volume AS sellVolume,
+        buy_user_id AS buyUserId,
+        buy_coin_id AS buyCoinId,
+        buy_order_id AS buyCoinId,
+        buy_volume AS buyVolume,
+        buy_price AS buyPrice,
+        buy_fee_rate AS buyFeeRate,
+        order_id AS orderId,
+        amount AS amount,
+        price AS price,
+        volume AS volume,
+        deal_buy_fee AS dealSellFee,
+        deal_sell_fee_rate AS dealSellFeeRate,
+        deal_buy_fee AS dealBuyFee,
+        deal_buy_fee_rate AS dealBuyFeeRate,
+        status AS status,
+        last_update_time AS lastUpdateTime,
+        created
+    </sql>
+
+    <!-- 获取最新成交价 -->
+    <select id="queryCurrentPrice" resultType="java.math.BigDecimal">
+        SELECT
+            IFNULL(t.price, 0) AS price
+        FROM turnover_order t
+        WHERE t.market_id = #{marketId}
+        AND t.status = 1
+        ORDER BY t.created DESC LIMIT 1
+    </select>
+
+    <!-- 查询卖单成交 -->
+    <sql id="buyOrder">
+        SELECT
+            d.created AS createTime,
+            e.market_name AS marketName,
+            e.symbol,
+            m.title AS marketTitle,
+            e.price_type AS priceType,
+            e.type,
+            e.trade_type AS tradeType,
+            d.price AS turnoverPrice,
+            d.volume AS turnoverNum,
+            d.amount AS turnoverAmount,
+            e.lock_margin AS lockMargin,
+            d.deal_buy_fee AS fee
+        FROM entrust_order e LEFT JOIN turnover_order d ON e.id = d.buy_order_id LEFT JOIN market m ON e.market_id = m.id
+        WHERE
+            e.user_id = #{userId}
+            AND e.type = 1
+            AND e.deal > 0
+    </sql>
+
+    <!-- 查询卖单成交 -->
+    <sql id="sellOrder">
+        SELECT
+            d.created AS createTime,
+            e.market_name AS marketName,
+            e.symbol,
+            m.title AS marketTitle,
+            e.price_type AS priceType,
+            e.type,
+            e.trade_type AS tradeType,
+            d.price AS turnoverPrice,
+            d.volume AS turnoverNum,
+            d.amount AS turnoverAmount,
+            e.lock_margin AS lockMargin,
+            d.deal_sell_fee AS fee
+        FROM entrust_order e LEFT JOIN turnover_order d ON e.id = d.sell_order_id LEFT JOIN market m ON e.market_id = m.id
+        WHERE
+            e.user_id = #{userId}
+            AND e.type = 2
+            AND e.deal > 0
+    </sql>
+
+    <!-- 时间，市场，市场类型，买卖类型，交易类型，价格，数量，成交总额，保证金，手续费    查询条件：交易市场，买卖类型 -->
+    <select id="selectOrdersCount" resultType="java.lang.Long">
+        SELECT count(1) FROM (
+        <include refid="buyOrder"/>
+        UNION ALL
+        <include refid="sellOrder"/>
+        ) t WHERE 1 = 1
+        <if test="type > 0">
+            AND t.type = #{type}
+        </if>
+        <if test="symbol != null and symbol != '' and symbol != '0'.toString()">
+            AND t.symbol = #{symbol}
+        </if>
+    </select>
+
+    <select id="selectListPage" resultType="com.blockeng.mining.entity.TurnoverOrder">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `turnover_order` a
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY a.created DESC
+    </select>
+
+    <select id="getOrders" resultType="com.blockeng.mining.entity.TurnoverOrder">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `turnover_order`
+        <![CDATA[
+        where
+          last_update_time< #{endDate} and last_update_time >=#{startDate}
+         ]]>
+
+    </select>
+    <select id="getSellUser" resultType="java.lang.String">
+        SELECT
+        sell_user_id
+        FROM `turnover_order`
+        group by sell_user_id
+    </select>
+    <select id="getBuyUser" resultType="java.lang.String">
+        SELECT
+        buy_user_id
+        FROM `turnover_order`
+        group by buy_user_id
+    </select>
+    <select id="getOrderByUseridByDay" resultType="com.blockeng.mining.entity.TurnoverOrder">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM `turnover_order`
+        <![CDATA[ where last_update_time <= #{endDate} and last_update_time >= #{startDate}
+         and (sell_user_id = #{userid} or buy_user_id = #{userid})
+         ]]>
+    </select>
+
+
+
+</mapper>

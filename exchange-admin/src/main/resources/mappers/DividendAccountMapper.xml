@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.DividendAccountMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.DividendAccount">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="reward_amount" property="rewardAmount"/>
+        <result column="unlock_amount" property="unlockAmount"/>
+        <result column="lock_amount" property="lockAmount"/>
+        <result column="unlock_date" property="unlockDate"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, reward_amount AS rewardAmount,
+        unlock_amount as unlockAmount, unlock_date as unlockDate,
+        lock_date as lockDate,
+        created,last_update_time as lastUpdateTime
+    </sql>
+
+    <resultMap id="selectListResultMap" type="com.blockeng.admin.dto.DividendAccountDTO">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="username" property="username"/>
+        <result column="mobile" property="mobile"/>
+        <result column="id_card" property="idCard"/>
+        <result column="reward_amount" property="rewardAmount"/>
+        <result column="unlock_amount" property="unlockAmount"/>
+        <result column="lock_amount" property="lockAmount"/>
+        <result column="unlock_date" property="unlockDate"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+    <select id="selectListPage" resultMap="selectListResultMap">
+        <![CDATA[
+    SELECT
+    pp.id,pp.unlock_date,bb.username, bb.mobile,pp.user_id,pp.reward_amount,pp.lock_amount,pp.unlock_amount, pp.created, pp.last_update_time, bb.id_card
+    FROM dividend_account as pp inner join  user as bb on pp.user_id =bb.id
+    ]]>
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY pp.created DESC
+    </select>
+
+
+
+</mapper>

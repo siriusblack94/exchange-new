@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.wallet.mapper.WalletCollectTaskMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.wallet.entity.WalletCollectTask">
+        <id column="id" property="id"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="coin_type" property="coinype"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="user_id" property="userId"/>
+        <result column="txid" property="txid"/>
+        <result column="amount" property="amount"/>
+        <result column="chain_fee" property="chainFee"/>
+        <result column="mark" property="mark"/>
+        <result column="status" property="status"/>
+        <result column="from_address" property="fromAddress"/>
+        <result column="to_address" property="toAddress"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, coin_id AS coinId,coin_type AS coinType, coin_name AS coinName,
+        user_id AS userId, txid, amount,
+        chain_fee AS chainFee,mmark, status,
+        from_address AS fromAddress,to_address AS toAddress,
+        last_update_time AS lastUpdateTime,created
+    </sql>
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mapper.CashRechargeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.entity.CashRecharge">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="num" property="num"/>
+        <result column="fee" property="fee"/>
+        <result column="feecoin" property="feecoin"/>
+        <result column="mum" property="mum"/>
+        <result column="type" property="type"/>
+        <result column="tradeno" property="tradeno"/>
+        <result column="outtradeno" property="outtradeno"/>
+        <result column="remark" property="remark"/>
+        <result column="audit_remark" property="auditRemark"/>
+        <result column="step" property="step"/>
+        <result column="status" property="status"/>
+        <result column="name" property="name"/>
+        <result column="bank_name" property="bankName"/>
+        <result column="bank_card" property="bankCard"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, coin_id AS coinId, coin_name AS coinName, num, fee, feecoin, mum, type, tradeno,
+        outtradeno, remark, audit_remark AS auditRemark, step, status,name,bank_name as bankName,bank_card as bankCard,
+        last_update_time AS lastUpdateTime, created
+    </sql>
+
+</mapper>

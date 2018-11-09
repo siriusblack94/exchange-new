@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.SysUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.SysUser">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="fullname" property="fullname"/>
+        <result column="mobile" property="mobile"/>
+        <result column="email" property="email"/>
+        <result column="status" property="status"/>
+        <result column="create_by" property="createBy"/>
+        <result column="modify_by" property="modifyBy"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, username, password, fullname, mobile, email, status, create_by AS createBy, modify_by AS modifyBy, created,
+        last_update_time AS lastUpdateTime
+    </sql>
+
+    <select id="selectSysUserPage" resultType="com.blockeng.admin.entity.SysUser">
+        SELECT
+        u.id,
+        u.username,
+        u.PASSWORD,
+        u.fullname,
+        u.mobile,
+        u.email,
+        u.STATUS,
+        u.create_by AS createBy,
+        u.modify_by AS modifyBy,
+        u.created,
+        u.last_update_time AS lastUpdateTime,
+        GROUP_CONCAT( r.CODE ) AS roleStrings
+        FROM
+        sys_user AS u
+        LEFT JOIN sys_user_role AS ur ON u.id = ur.user_id
+        LEFT JOIN sys_role AS r ON r.id = ur.role_id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY
+        u.id
+        order by u.id desc
+    </select>
+</mapper>

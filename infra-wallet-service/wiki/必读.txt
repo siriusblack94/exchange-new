@@ -1,0 +1,2 @@
+按照jar到本地资源
+mvn install:install-file -Dfile=目录/infra-wallet.jar -DgroupId=com.clg -DartifactId=infra-wallet -Dversion=2.0.0 -Dpackaging=jar -DgeneratePom=true -DcreateChecksum=true

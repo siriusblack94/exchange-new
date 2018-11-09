@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.WorkIssueMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.WorkIssue">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="answer_user_id" property="answerUserId"/>
+        <result column="answer_name" property="answerName"/>
+        <result column="question" property="question"/>
+        <result column="answer" property="answer"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <resultMap id="BaseDTOMap" type="com.blockeng.admin.dto.UserWorkIssueDTO" extends="BaseResultMap">
+
+        <result column="username" property="username"/>
+        <result column="real_name" property="realName"/>
+
+    </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, question, answer, status, last_update_time AS lastUpdateTime, created
+    </sql>
+
+    <sql id="Base_Column_DTO">
+        w.id,
+        w.answer,
+        w.answer_name,
+        w.answer_user_id,
+        w.created,
+        w.last_update_time,
+        w.question,
+        w.`status`,
+        w.user_id,
+        u.username,
+        u.real_name
+
+    </sql>
+
+    <sql id="params">
+        <if test=" status !=null and status!='' ">
+            and w.`status`=#{status}
+        </if>
+        <if test=" startTime !=null and startTime!='' ">
+            <![CDATA[ and w.created >= #{startTime} ]]>
+        </if>
+        <if test=" endTime !=null and endTime!='' ">
+            <![CDATA[ and w.created <= #{endTime} ]]>
+        </if>
+    </sql>
+    <select id="selectMapPage" resultMap="BaseDTOMap">
+        select
+        <include refid="Base_Column_DTO"/>
+        from work_issue w
+        LEFT JOIN `user` u ON w.user_id=u.id
+        where 1=1
+        <include refid="params"/>
+        ORDER BY w.created DESC
+    </select>
+
+
+    <select id="selectOneObj" resultMap="BaseDTOMap">
+
+        SELECT
+        <include refid="Base_Column_DTO"/>
+        FROM
+        cash_recharge c
+        INNER JOIN `user` u ON c.user_id = u.id
+        where c.id=#{id}
+    </select>
+
+
+</mapper>

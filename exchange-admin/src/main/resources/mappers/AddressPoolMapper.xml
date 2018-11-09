@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.AddressPoolMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.AddressPool">
+        <id column="id" property="id"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="address" property="address"/>
+        <result column="keystore" property="keystore"/>
+        <result column="pwd" property="pwd"/>
+        <result column="coin_type" property="coinType"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, coin_id AS coinId, address, keystore, pwd, coin_type AS coinType
+    </sql>
+
+</mapper>

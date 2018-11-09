@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.trade.mapper.AccountDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.trade.entity.AccountDetail">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="account_id" property="accountId"/>
+        <result column="ref_account_id" property="refAccountId"/>
+        <result column="order_id" property="orderId"/>
+        <result column="direction" property="direction"/>
+        <result column="business_type" property="businessType"/>
+        <result column="amount" property="amount"/>
+        <result column="fee" property="fee"/>
+        <result column="remark" property="remark"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, coin_id AS coinId, account_id AS accountId, ref_account_id AS refAccountId, order_id AS
+        orderId, direction, business_type AS businessType, amount, fee, remark, created
+    </sql>
+
+</mapper>

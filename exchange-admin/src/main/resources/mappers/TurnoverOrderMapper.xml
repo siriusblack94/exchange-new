@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.TurnoverOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.TurnoverOrder">
+        <id column="id" property="id"/>
+        <result column="market_id" property="marketId"/>
+        <result column="market_type" property="marketType"/>
+        <result column="trade_type" property="tradeType"/>
+        <result column="symbol" property="symbol"/>
+        <result column="market_name" property="marketName"/>
+        <result column="sell_user_id" property="sellUserId"/>
+        <result column="sell_coin_id" property="sellCoinId"/>
+        <result column="sell_order_id" property="sellOrderId"/>
+        <result column="sell_price" property="sellPrice"/>
+        <result column="sell_fee_rate" property="sellFeeRate"/>
+        <result column="sell_volume" property="sellVolume"/>
+        <result column="buy_user_id" property="buyUserId"/>
+        <result column="buy_coin_id" property="buyCoinId"/>
+        <result column="buy_order_id" property="buyOrderId"/>
+        <result column="buy_volume" property="buyVolume"/>
+        <result column="buy_price" property="buyPrice"/>
+        <result column="buy_fee_rate" property="buyFeeRate"/>
+        <result column="order_id" property="orderId"/>
+        <result column="amount" property="amount"/>
+        <result column="price" property="price"/>
+        <result column="volume" property="volume"/>
+        <result column="deal_sell_fee" property="dealSellFee"/>
+        <result column="deal_sell_fee_rate" property="dealSellFeeRate"/>
+        <result column="deal_buy_fee" property="dealBuyFee"/>
+        <result column="deal_buy_fee_rate" property="dealBuyFeeRate"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+
+    <resultMap id="TurnOverOrderTheTotalCountDTOPageMap" type="com.blockeng.admin.dto.TurnOverOrderTheTotalCountDTOPage">
+        <result column="totalTurnOverNumber" property="totalTurnOverNumber"/>
+        <result column="totalTurnOverAmount" property="totalTurnOverAmount"/>
+        <result column="totalBuyFee" property="totalBuyFee"/>
+        <result column="totalSellFee" property="totalSellFee"/>
+        <result column="totalOrderNum" property="totalOrderNum"/>
+    </resultMap>
+
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        market_id AS marketId,
+        market_type AS marketType,
+        trade_type AS tradeType,
+        symbol,
+        market_name AS marketName,
+        sell_user_id AS sellUserId,
+        last_update_time AS lastUpdateTime,
+        sell_order_id AS sellOrderId,
+        sell_price AS sellPrice,
+        sell_fee_rate AS sellFeeRate,
+        sell_volume AS sellVolume,
+        buy_user_id AS buyUserId,
+        buy_coin_id AS buyCoinId,
+        buy_order_id AS buyOrderId,
+        buy_volume AS buyVolume,
+        buy_price AS buyPrice,
+        buy_fee_rate AS buyFeeRate,
+        order_id AS orderId,
+        amount AS amount,
+        price AS price,
+        volume AS volume,
+        deal_sell_fee AS dealSellFee,
+        deal_sell_fee_rate AS dealSellFeeRate,
+        deal_buy_fee AS dealBuyFee,
+        deal_buy_fee_rate AS dealBuyFeeRate,
+        status AS status,
+        <!-- last_update_time AS lastUpdateTime, 重复 2018.8.24 -->
+        created
+    </sql>
+
+    <sql id="Page_Column_List">
+        a.id AS id,
+        a.market_id AS marketId,
+        a.market_type AS marketType,
+        a.symbol,
+        a.market_name AS marketName,
+        a.sell_user_id AS sellUserId,
+        a.last_update_time AS lastUpdateTime,
+        a.sell_order_id AS sellOrderId,
+        a.sell_price AS sellPrice,
+        a.sell_fee_rate AS sellFeeRate,
+        a.sell_volume AS sellVolume,
+        a.buy_user_id AS buyUserId,
+        a.buy_coin_id AS buyCoinId,
+        a.buy_order_id AS buyOrderId,
+        a.buy_volume AS buyVolume,
+        a.buy_price AS buyPrice,
+        a.buy_fee_rate AS buyFeeRate,
+        a.order_id AS orderId,
+        a.amount AS amount,
+        a.price AS price,
+        a.volume AS volume,
+        a.deal_sell_fee AS dealSellFee,
+        a.deal_sell_fee_rate AS dealSellFeeRate,
+        a.deal_buy_fee AS dealBuyFee,
+        a.deal_buy_fee_rate AS dealBuyFeeRate,
+        a.status AS status,
+        <!-- a.last_update_time AS lastUpdateTime, 重复  2018.8.24 -->
+        a.created AS created,
+        b.username AS buy_user_name,
+        c.username AS sell_user_name
+    </sql>
+
+
+    <sql id="Page_Column_List_User">
+        a.id AS id,
+        a.market_id AS marketId,
+        a.market_type AS marketType,
+        a.symbol,
+        a.market_name AS marketName,
+        a.sell_user_id AS sellUserId,
+        a.last_update_time AS lastUpdateTime,
+        a.sell_order_id AS sellOrderId,
+        a.sell_price AS sellPrice,
+        a.sell_fee_rate AS sellFeeRate,
+        a.sell_volume AS sellVolume,
+        a.buy_user_id AS buyUserId,
+        a.buy_coin_id AS buyCoinId,
+        a.buy_order_id AS buyOrderId,
+        a.buy_volume AS buyVolume,
+        a.buy_price AS buyPrice,
+        a.buy_fee_rate AS buyFeeRate,
+        a.order_id AS orderId,
+        a.amount AS amount,
+        a.price AS price,
+        a.volume AS volume,
+        a.deal_sell_fee AS dealSellFee,
+        a.deal_sell_fee_rate AS dealSellFeeRate,
+        a.deal_buy_fee AS dealBuyFee,
+        a.deal_buy_fee_rate AS dealBuyFeeRate,
+        a.status AS status,
+        <!-- a.last_update_time AS lastUpdateTime, 重复  2018.8.24 -->
+        a.created AS created
+    </sql>
+
+    <!--<select id="selectListPage" resultType="com.blockeng.admin.entity.TurnoverOrder">-->
+    <!--SELECT-->
+    <!--<include refid="Page_Column_List"/>-->
+    <!--FROM turnover_order a-->
+    <!--INNER JOIN user b ON a.buy_user_id = b.id-->
+    <!--INNER JOIN user c ON a.sell_user_id = c.id-->
+    <!--<where>-->
+    <!--${ew.sqlSegment}-->
+    <!--</where>-->
+    <!--ORDER BY a.created DESC-->
+    <!--</select>-->
+
+    <select id="selectListPage" resultType="com.blockeng.admin.entity.TurnoverOrder">
+        SELECT
+        <include refid="Page_Column_List"/>
+        FROM (
+        select * from turnover_order a
+        <where>
+            ${turnover1Ew.sqlSegment}
+        </where>
+        ) a
+        left JOIN user b ON a.buy_user_id = b.id
+        left JOIN user c ON a.sell_user_id = c.id
+        <where>
+            ${turnover2Ew.sqlSegment}
+        </where>
+        ORDER BY a.created DESC
+        limit #{current},#{size}
+    </select>
+
+
+    <select id="selectListPageCount" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM (
+        select * from turnover_order a
+        <where>
+            ${turnover1Ew.sqlSegment}
+        </where>
+        ) a
+        left JOIN user b ON a.buy_user_id = b.id
+        left JOIN user c ON a.sell_user_id = c.id
+        <where>
+            ${turnover2Ew.sqlSegment}
+        </where>
+    </select>
+
+
+    <select id="selectListPageByOrder" resultType="com.blockeng.admin.entity.TurnoverOrder">
+        SELECT
+        <include refid="Page_Column_List_User"/>
+        FROM (
+        select * from turnover_order a
+        <where>
+            ${turnover1Ew.sqlSegment}
+        </where>
+        ) a
+        ORDER BY a.created DESC
+        limit #{current},#{size}
+    </select>
+
+    <select id="selectListPageByOrderCount" resultType="java.lang.Integer">
+
+        SELECT
+        count(1)
+        FROM (
+        select * from turnover_order a
+        <where>
+            ${turnover1Ew.sqlSegment}
+        </where>
+        ) a
+    </select>
+    <!--SELECT-->
+    <!--<include refid="Page_Column_List_User"/>-->
+    <!--FROM (-->
+    <!--select * from user b left join turnover_order a on a.sell_user_id = b.id-->
+    <!--<where>-->
+    <!--${turnover2Ew.sqlSegment}-->
+    <!--</where>-->
+    <!--) a-->
+    <!--ORDER BY a.created DESC-->
+
+    <select id="selectListPageByUser" resultType="com.blockeng.admin.entity.TurnoverOrder">
+        SELECT
+        <include refid="Page_Column_List_User"/>
+        FROM (
+        select * from turnover_order a
+        <where>
+            ${turnover1Ew.sqlSegment}
+        </where>
+        ) a
+        ORDER BY a.created DESC
+        limit #{current},#{size}
+    </select>
+    <!--where a.buy_user_id =-->
+    <!--(-->
+    <!--select id from user b-->
+    <!--<where>-->
+    <!--${turnover2Ew.sqlSegment}-->
+    <!--</where>-->
+    <!--limit 1-->
+    <!--)-->
+    <!--or a.sell_user_id = (-->
+    <!--select id from user b-->
+    <!--<where>-->
+    <!--${turnover2Ew.sqlSegment}-->
+    <!--</where>-->
+    <!--limit 1-->
+    <!--)-->
+
+    <!--SELECT-->
+    <!--<include refid="Page_Column_List_User"/>-->
+    <!--FROM (-->
+    <!--select * from user b left join turnover_order a on a.sell_user_id = b.id-->
+    <!--<where>-->
+    <!--${turnover2Ew.sqlSegment}-->
+    <!--</where>-->
+    <!--) a-->
+    <!--ORDER BY a.created DESC-->
+
+    <select id="selectListPageByUserCount" resultType="java.lang.Integer">
+
+        SELECT
+        count(1)
+        FROM (
+        select * from turnover_order a
+        <where>
+            ${turnover1Ew.sqlSegment}
+        </where>
+
+        ) a
+
+    </select>
+    <!--where a.buy_user_id =-->
+    <!--(-->
+    <!--select id from user b-->
+    <!--<where>-->
+    <!--${turnover2Ew.sqlSegment}-->
+    <!--</where>-->
+    <!--limit 1-->
+    <!--)-->
+    <!--or a.sell_user_id = (-->
+    <!--select id from user b-->
+    <!--<where>-->
+    <!--${turnover2Ew.sqlSegment}-->
+    <!--</where>-->
+    <!--limit 1-->
+    <!--)-->
+    <select id="countTradeByDateAndUidStrs" resultType="java.lang.Integer">
+        SELECT count(1) FROM turnover_order
+        WHERE DATE_FORMAT(created,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+        AND sell_user_id IN (#{uidStrs})
+        OR buy_user_id IN (#{uidStrs})
+    </select>
+
+
+    <select id="selectTradeTopVolumePageCount" resultType="java.lang.Integer">
+
+        SELECT
+        count(1)
+        FROM `turnover_order` a
+        <where>
+            ${ew.sqlSegment}
+        </where>
+
+    </select>
+
+    <select id="selectTradeTopVolumePage" resultType="com.blockeng.admin.dto.TradeTopVolumeDTO">
+        SELECT
+        a.created AS trade_date,
+        a.market_name AS market_name,
+        a.buy_user_id AS buy_user_id,
+        a.sell_user_id AS sell_user_id,
+        a.market_type AS marketType,
+        a.trade_type AS trade_Type,
+        a.volume AS volume
+        FROM `turnover_order` a
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY a.volume DESC,a.created desc
+        limit #{current},#{size}
+    </select>
+
+
+    <!--交易币种 ，交易市场，交易量，交易笔数，统计时间-->
+    <select id="selectCountMain" resultType="com.blockeng.admin.dto.TurnoverOrderCountDTO">
+        SELECT
+        t.sell_coin_id as sellCoinId,
+        t.market_name as marketName,
+        SUM(t.volume) sumVolume,
+        COUNT(t.id) turnoverNum,
+        DATE_FORMAT(t.created, "%Y-%m-%d") created
+        FROM
+        turnover_order t
+        WHERE
+        1=1
+        <if test=" startTime !=null and startTime!='' ">
+            <![CDATA[ and t.created >= #{startTime} ]]>
+        </if>
+        <if test=" endTime !=null and endTime!='' ">
+            <![CDATA[ and t.created <= #{endTime} ]]>
+        </if>
+        GROUP BY
+        DATE_FORMAT(t.created, "%Y-%m-%d"),
+        t.market_name,
+        t.sell_coin_id
+        ORDER BY DATE_FORMAT(t.created, "%Y-%m-%d") desc
+    </select>
+
+
+    <!---卖方 最多交易用户，该用户交易量-->
+    <select id="selectSellUserCount" resultType="com.blockeng.admin.dto.TurnoverOrderCountDTO">
+        SELECT
+        DATE_FORMAT(t.created, "%Y-%m-%d") created,
+        t.sell_coin_id sellCoinId,
+        t.sell_user_id turnoverUserId,
+        sum(t.volume) maxTurnoverNum
+        FROM
+        turnover_order t
+        where
+        t.sell_coin_id IN
+        <foreach collection="coins" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY t.sell_coin_id,t.sell_user_id,DATE_FORMAT(t.created, "%Y-%m-%d")
+        ORDER BY DATE_FORMAT(t.created, "%Y-%m-%d") desc
+    </select>
+
+
+    <!---买方 最多交易用户，该用户交易量-->
+    <select id="selectBuyUserCount" resultType="com.blockeng.admin.dto.TurnoverOrderCountDTO">
+        SELECT
+        DATE_FORMAT(t.created, "%Y-%m-%d") created,
+        t.sell_coin_id sellCoinId,
+        t.buy_user_id turnoverUserId,
+        sum(t.volume) maxTurnoverNum
+        FROM
+        turnover_order t
+        where
+        t.sell_coin_id IN
+        <foreach collection="coins" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY t.sell_coin_id,t.buy_user_id,DATE_FORMAT(t.created, "%Y-%m-%d")
+        ORDER BY DATE_FORMAT(t.created, "%Y-%m-%d") desc
+    </select>
+
+    <select id="selectTheCountDTOCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) from
+        (
+        select sum(volume) as turnOverNumber,
+        sum(amount) as turnOverAmount,
+        sum(sell_fee) as sellFee,
+        sum(buy_fee) as buyFee,
+        sum(order_num) as orderNum,
+        id as userId,
+        market_name as marketName,
+        flag as userType
+        from
+        (
+        (
+        select sum(IFNULL(volume,0)) as volume , sum(IFNULL(amount,0)) as amount, sum(IFNULL(deal_sell_fee,0)) as
+        sell_fee,0 as buy_fee, a.id ,c.name as market_name,
+        count(DISTINCT b.sell_order_id) as order_num ,
+        1 as type,
+        a.flag
+        from user a
+        left join turnover_order b on b.sell_user_id = a.id
+        left join market c on b.market_id = c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY a.id, c.name,a.flag
+        )
+        UNION
+        (
+        select sum(IFNULL(volume,0)) as volume , sum(IFNULL(amount,0)) as amount, 0 as
+        sell_fee,sum(IFNULL(deal_buy_fee,0)) as buy_fee, a.id ,c.name as market_name,
+        count(DISTINCT b.buy_order_id) as order_num ,
+        2 as type,
+        a.flag
+        from user a
+        left join turnover_order b on b.buy_user_id = a.id
+        left join market c on b.market_id = c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY a.id, c.name,a.flag
+        )
+        ) a group by id,market_name,flag
+        ) f
+    </select>
+
+    <select id="selectTheCountDTO" resultType="com.blockeng.admin.dto.TurnOverOrderTheCountDTO">
+        select sum(volume) as turnOverNumber,
+        sum(amount) as turnOverAmount,
+        sum(sell_fee) as sellFee,
+        sum(buy_fee) as buyFee,
+        sum(order_num) as orderNum,
+        id as userId,
+        market_name as marketName,
+        flag as userType
+        from
+        (
+        (
+        select sum(IFNULL(volume,0)) as volume , sum(IFNULL(amount,0)) as amount, sum(IFNULL(deal_sell_fee,0)) as
+        sell_fee,0 as buy_fee, a.id ,c.name as market_name,
+        count(DISTINCT b.sell_order_id) as order_num ,
+        1 as type,
+        a.flag
+        from user a
+        left join turnover_order b on b.sell_user_id = a.id
+        left join market c on b.market_id = c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY a.id, c.name,a.flag
+        )
+        UNION
+        (
+        select sum(IFNULL(volume,0)) as volume , sum(IFNULL(amount,0)) as amount, 0 as
+        sell_fee,sum(IFNULL(deal_buy_fee,0)) as buy_fee, a.id ,c.name as market_name,
+        count(DISTINCT b.buy_order_id) as order_num ,
+        2 as type,
+        a.flag
+        from user a
+        left join turnover_order b on b.buy_user_id = a.id
+        left join market c on b.market_id = c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY a.id, c.name,a.flag
+        )
+        ) a group by id,market_name,flag
+        limit #{current},#{size}
+    </select>
+
+    <select id="selectTheTotalCountDTO" resultMap="TurnOverOrderTheTotalCountDTOPageMap">
+        select IFNULL(SUM(turnOverNumber),0) AS totalTurnOverNumber , IFNULL(SUM(turnOverAmount),0) AS
+        totalTurnOverAmount,
+        IFNULL(SUM(sellFee),0) AS totalSellFee, IFNULL(SUM(buyFee),0) AS totalBuyFee, IFNULL(SUM(orderNum),0) AS
+        totalOrderNum
+        FROM(
+        select sum(volume) as turnOverNumber,
+        sum(amount) as turnOverAmount,
+        sum(sell_fee) as sellFee,
+        sum(buy_fee) as buyFee,
+        sum(order_num) as orderNum,
+        id as userId,
+        market_name as marketName,
+        flag as userType
+        from
+        (
+        (
+        select sum(IFNULL(volume,0)) as volume , sum(IFNULL(amount,0)) as amount, sum(IFNULL(deal_sell_fee,0)) as
+        sell_fee,0 as buy_fee, a.id ,c.name as market_name,
+        count(DISTINCT b.sell_order_id) as order_num ,
+        1 as type,
+        a.flag
+        from user a
+        left join turnover_order b on b.sell_user_id = a.id
+        left join market c on b.market_id = c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY a.id, c.name,a.flag
+        )
+        UNION
+        (
+        select sum(IFNULL(volume,0)) as volume , sum(IFNULL(amount,0)) as amount, 0 as
+        sell_fee,sum(IFNULL(deal_buy_fee,0)) as buy_fee, a.id ,c.name as market_name,
+        count(DISTINCT b.buy_order_id) as order_num ,
+        2 as type,
+        a.flag
+        from user a
+        left join turnover_order b on b.buy_user_id = a.id
+        left join market c on b.market_id = c.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY a.id, c.name,a.flag
+        )
+        ) a group by id,market_name,flag
+        ) f
+    </select>
+    
+    <select id="selectBuyAndSellOrder" resultType="java.util.HashMap">
+        SELECT r.marketName,r.volume,r.amount,r.fee,r.flag FROM(
+        (SELECT t.`market_name` AS marketName,SUM(t.`volume`) AS volume,SUM(t.`amount`) AS amount,SUM(t.`deal_buy_fee`) AS fee,1 AS flag FROM `turnover_order` t WHERE t.`buy_user_id`=#{userId} AND t.`status`=#{status} GROUP BY t.`market_name`)
+        UNION ALL
+        (SELECT t.`market_name` AS marketName,SUM(t.`volume`) AS volume,SUM(t.`amount`) AS amount,SUM(t.`deal_sell_fee`) AS fee,2 AS flag FROM `turnover_order` t WHERE t.`sell_user_id`=#{userId} AND t.`status`=#{status} GROUP BY t.`market_name`)
+        ) r
+    </select>
+</mapper>

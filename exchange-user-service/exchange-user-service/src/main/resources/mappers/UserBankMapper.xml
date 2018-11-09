@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mapper.UserBankMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.entity.UserBank">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="remark" property="remark"/>
+        <result column="real_name" property="realName"/>
+        <result column="bank" property="bank"/>
+        <result column="bank_prov" property="bankProv"/>
+        <result column="bank_city" property="bankCity"/>
+        <result column="bank_addr" property="bankAddr"/>
+        <result column="bank_card" property="bankCard"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId,remark, real_name AS realName, bank, bank_prov AS bankProv, bank_city AS bankCity,
+        bank_addr AS bankAddr, bank_card AS bankCard, status, last_update_time AS lastUpdateTime, created
+    </sql>
+
+</mapper>

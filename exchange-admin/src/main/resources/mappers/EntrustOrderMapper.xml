@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.EntrustOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.EntrustOrder">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="market_id" property="marketId"/>
+        <result column="market_type" property="marketType"/>
+        <result column="symbol" property="symbol"/>
+        <result column="market_name" property="marketName"/>
+        <result column="market_type" property="marketType"/>
+        <result column="price" property="price"/>
+        <result column="merge_low_price" property="mergeLowPrice"/>
+        <result column="merge_high_price" property="mergeHighPrice"/>
+        <result column="volume" property="volume"/>
+        <result column="amount" property="amount"/>
+        <result column="fee_rate" property="feeRate"/>
+        <result column="fee" property="fee"/>
+        <result column="contract_unit" property="contractUnit"/>
+        <result column="deal" property="deal"/>
+        <result column="freeze" property="freeze"/>
+        <result column="lock_margin" property="lockMargin"/>
+        <result column="price_type" property="priceType"/>
+        <result column="trade_type" property="tradeType"/>
+        <result column="type" property="type"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+
+    <resultMap id="BaseResultMap1" type="com.blockeng.admin.entity.AccountFreeze">
+
+        <result column="userFlag" property="userFlag"/>
+        <result column="freeze" property="freeze"/>
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        user_id AS userId,
+        market_id AS marketId,
+        market_type AS marketType,
+        market_name AS marketName,
+        symbol,
+        price,
+        merge_low_price AS mergeLowPrice,
+        merge_high_price AS mergeHighPrice,
+        volume,
+        amount,
+        fee_rate AS feeRate,
+        fee,
+        contract_unit AS contractUnit,
+        deal,
+        freeze,
+        lock_margin AS lockMargin,
+        price_type AS priceType,
+        trade_type AS tradeType,
+        type,
+        STATUS,
+        last_update_time AS lastUpdateTime,
+        created
+    </sql>
+
+    <sql id="Page_Column_List">
+        a.id,
+        a.user_id AS userId,
+        a.market_id AS marketId,
+        a.market_type AS marketType,
+        a.market_name AS marketName,
+        a.symbol,
+        a.price,
+        a.merge_low_price AS mergeLowPrice,
+        a.merge_high_price AS mergeHighPrice,
+        a.volume * a.price AS predictTurnoverAmount,
+        a.volume,
+        a.amount,
+        a.fee_rate AS feeRate,
+        a.fee,
+        a.contract_unit AS contractUnit,
+        a.deal,
+        a.freeze,
+        a.lock_margin AS lockMargin,
+        a.price_type AS priceType,
+        a.trade_type AS tradeType,
+        a.type,
+        a.STATUS,
+        a.last_update_time AS lastUpdateTime,
+        a.created,
+        b.username AS userName,
+        <!--b.real_name AS real_name,-->
+        b.mobile AS mobile
+    </sql>
+
+    <!--FROM entrust_order a-->
+    <!--INNER JOIN `user` b ON a.user_id = b.id-->
+    <!--<where>-->
+    <!--${ew.sqlSegment}-->
+    <!--</where>-->
+    <!--保持和页面导出逻辑一致 此sql条件在java中有修改 没用子查询直接连接再做条件查询消耗时间-->
+    <!-- 2018.05.25 -->
+    <select id="selectListPage" resultType="com.blockeng.admin.entity.EntrustOrder">
+        SELECT
+        <include refid="Page_Column_List"/>
+        FROM
+        (
+        SELECT
+        *
+        FROM `entrust_order` a
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        order by a.`created`
+        ) as a LEFT JOIN `user` b ON a.`user_id` = b.id
+        ORDER BY a.created DESC
+
+    </select>
+
+
+    <select id="selectListPageEmpty" resultType="com.blockeng.admin.entity.EntrustOrder">
+        SELECT
+        <include refid="Page_Column_List"/>
+        FROM
+        (
+        SELECT
+        *
+        FROM `entrust_order` a
+        limit #{current},#{size}
+        ) as a LEFT JOIN `user` b ON a.`user_id` = b.id
+        ORDER BY a.created DESC
+
+    </select>
+
+
+    <select id="selectListPageCountInDays" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        (
+        SELECT
+        *
+        FROM `entrust_order` a
+        <where>
+            ${entrustEw.sqlSegment}
+        </where>
+        ) as a LEFT JOIN `user` b ON a.`user_id` = b.id
+        ORDER BY a.created DESC
+    </select>
+
+
+    <select id="selectListPageByOrder" resultType="com.blockeng.admin.entity.EntrustOrder">
+        SELECT
+        <include refid="Page_Column_List"/>
+        FROM
+        (
+        SELECT
+        *
+        FROM `entrust_order` a
+        <where>
+            ${entrustEw.sqlSegment}
+        </where>
+        order by a.`created`
+        ) as a LEFT JOIN `user` b ON a.`user_id` = b.id
+        <where>
+            ${userEw.sqlSegment}
+        </where>
+        ORDER BY a.created DESC
+        limit #{current},#{size}
+    </select>
+
+
+    <select id="selectListPageByUser" resultType="com.blockeng.admin.entity.EntrustOrder">
+        SELECT
+        <include refid="Page_Column_List"/>
+        FROM
+        (
+        SELECT
+        *
+        FROM `user` b
+        <where>
+            ${userEw.sqlSegment}
+        </where>
+        order by b.`created`
+        ) as b LEFT JOIN `entrust_order` a ON a.`user_id` = b.id
+        <where>
+            ${entrustEw.sqlSegment}
+        </where>
+        ORDER BY a.created DESC
+        limit #{current},#{size}
+    </select>
+
+    <select id="selectListPageCount" resultType="java.lang.Integer">
+       SELECT
+       count(1)
+       FROM `entrust_order` a
+
+   </select>
+
+
+    <select id="selectListPageByUserCount" resultType="java.lang.Integer">
+
+        SELECT
+        count(1)
+        FROM
+        (
+        SELECT
+        *
+        FROM `user` b
+        <where>
+            ${userEw.sqlSegment}
+        </where>
+        ) as b LEFT JOIN `entrust_order` a ON a.`user_id` = b.id
+        <where>
+            ${entrustEw.sqlSegment}
+        </where>
+    </select>
+
+    <select id="selectListPageByOrderCount" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        (
+        SELECT
+        *
+        FROM `entrust_order` a
+        <where>
+            ${entrustEw.sqlSegment}
+        </where>
+        order by a.`created`
+        ) as a LEFT JOIN `user` b ON a.`user_id` = b.id
+        <where>
+            ${userEw.sqlSegment}
+        </where>
+    </select>
+
+    <select id="selectTransactionFreezeByMarket" resultMap="BaseResultMap1">
+        SELECT u.flag AS userFlag,SUM(c.transaction_freeze) AS freeze
+        FROM
+        (
+        (SELECT a.`market_name` AS market_name,SUM(a.`freeze`) AS transaction_freeze,a.`user_id` AS user_id FROM
+        `entrust_order` a WHERE a.`market_name` LIKE concat('%','/','${coinName}','%') AND a.`status` =0 AND a.`type` =1
+        GROUP BY `market_name`,user_id)
+        UNION ALL
+        (SELECT e.`market_name` AS market_name,SUM(e.`freeze`) AS transaction_freeze,e.`user_id` AS user_id FROM
+        `entrust_order` e WHERE e.`market_name` LIKE concat('%','${coinName}','/','%') AND e.`status` =0 AND e.`type` =2
+        GROUP BY `market_name`,user_id)
+        ) c
+        LEFT JOIN `user` u on c.user_id=u.id
+        <choose>
+            <when test=" userFlag!='' and userFlag!=null ">
+                AND u.flag in (${userFlag})
+            </when>
+            <otherwise>
+                WHERE u.flag in (0,1,2)
+            </otherwise>
+        </choose>
+        GROUP BY u.flag
+    </select>
+
+    <select id="selectExchangeFreezeGroupCoin" resultType="java.util.HashMap">
+        SELECT r.marketName,r.freeze,r.type FROM(
+          (SELECT e.`market_name` AS marketName,SUM(e.`freeze`) AS freeze,1 AS type FROM `entrust_order` e WHERE e.`user_id`=#{userId} AND `type`=1 AND e.status=#{status} GROUP BY e.`market_name`)
+          UNION ALL
+          (SELECT e.`market_name` AS marketName,SUM(e.`freeze`) AS freeze,2 AS type FROM `entrust_order` e WHERE e.`user_id`=#{userId} AND `type`=2 AND e.status=#{status} GROUP BY e.`market_name`)
+        ) r
+    </select>
+
+    <update id="startCancel" >
+        UPDATE `entrust_order` SET  status = 4 WHERE id = #{orderId}
+    </update>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.MiningDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.MiningDetail">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="area_name" property="areaName"/>
+        <result column="balance_amount" property="totalFee"/>
+        <result column="time_mining" property="timeMining"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id , area_name, total_fee ,
+        mining_time ,created,last_update_time
+    </sql>
+
+    <insert id="updateMining">
+        INSERT INTO `mining_detail` (area_name,total_fee,time_mining,user_id)
+        VALUES(#{areaName},#{totalFee},#{miningTime},#{userId})
+        ON DUPLICATE KEY UPDATE `total_fee` = total_fee + #{totalFee}
+    </insert>
+
+
+    <select id="dayTotalFee" resultType="com.blockeng.mining.dto.FeeDTO">
+        select m.`area_name` as name,sum(`total_fee`) as total from `mining_detail` m
+        where m.`time_mining` = #{time_mining} group by m.`area_name`
+    </select>
+
+
+</mapper>

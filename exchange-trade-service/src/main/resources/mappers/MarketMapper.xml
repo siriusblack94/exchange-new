@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.trade.mapper.MarketMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.trade.entity.Market">
+        <id column="id" property="id"/>
+        <result column="trade_area_id" property="tradeAreaId"/>
+        <result column="sell_coin_id" property="sellCoinId"/>
+        <result column="buy_coin_id" property="buyCoinId"/>
+        <result column="symbol" property="symbol"/>
+        <result column="name" property="name"/>
+        <result column="title" property="title"/>
+        <result column="img" property="img"/>
+        <result column="open_price" property="openPrice"/>
+        <result column="fee_buy" property="feeBuy"/>
+        <result column="fee_sell" property="feeSell"/>
+        <result column="num_min" property="numMin"/>
+        <result column="num_max" property="numMax"/>
+        <result column="trade_min" property="tradeMin"/>
+        <result column="trade_max" property="tradeMax"/>
+        <result column="price_scale" property="priceScale"/>
+        <result column="num_scale" property="numScale"/>
+        <result column="merge_depth" property="mergeDepth"/>
+        <result column="trade_time" property="tradeTime"/>
+        <result column="trade_week" property="tradeWeek"/>
+        <result column="sort" property="sort"/>
+        <result column="status" property="status"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        trade_area_id AS tradeAreaId,
+        sell_coin_id AS sellCoinId,
+        buy_coin_id AS buyCoinId,
+        symbol,
+        `name`,
+        title,
+        img,
+        open_price AS openPrice,
+        fee_buy AS feeBuy,
+        fee_sell AS feeSell,
+        num_min AS numMin,
+        num_max AS numMax,
+        trade_min AS tradeMin,
+        trade_max AS tradeMax,
+        price_scale AS priceScale,
+        num_scale AS numScale,
+        merge_depth AS mergeDepth,
+        trade_time AS tradeTime,
+        trade_week AS tradeWeek,
+        sort,
+        `status`,
+        last_update_time AS lastUpdateTime,
+        created
+    </sql>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.MineDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.MineData">
+        <id column="id" property="id"/>
+        <id column="pre_distributed" property="preDistributed"/>
+        <id column="pre_mining" property="preMining"/>
+        <id column="total_circulation" property="totalCirculation"/>
+        <result column="sec_irculation" property="secIrculation"/>
+        <result column="distributed" property="distributed"/>
+        <result column="per_million_revenue" property="perMillionRevenue"/>
+        <result column="statistics_date" property="statisticsDate"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, pre_distributed AS preDistributed, pre_mining AS preMining, total_circulation AS totalCirculation,
+        sec_irculation AS secIrculation, distributed,per_million_revenue AS perMillionRevenue,statistics_date AS
+        statisticsDate,
+        created,last_update_time AS lastUpdateTime
+    </sql>
+
+
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/infra-wallet-common/infra-wallet-common.iml" filepath="$PROJECT_DIR$/infra-wallet-common/infra-wallet-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/infra-wallet-parent/infra-wallet-parent.iml" filepath="$PROJECT_DIR$/infra-wallet-parent/infra-wallet-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/infra-wallet-service.iml" filepath="$PROJECT_DIR$/infra-wallet-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/infra-wallet-service-bitcoin/infra-wallet-service-bitcoin.iml" filepath="$PROJECT_DIR$/infra-wallet-service-bitcoin/infra-wallet-service-bitcoin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/infra-wallet-service-ethereum/infra-wallet-service-ethereum.iml" filepath="$PROJECT_DIR$/infra-wallet-service-ethereum/infra-wallet-service-ethereum.iml" />
+    </modules>
+  </component>
+</project>

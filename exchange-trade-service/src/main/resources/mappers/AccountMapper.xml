@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.trade.mapper.AccountMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.trade.entity.Account">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="status" property="status"/>
+        <result column="balance_amount" property="balanceAmount"/>
+        <result column="freeze_amount" property="freezeAmount"/>
+        <result column="recharge_amount" property="rechargeAmount"/>
+        <result column="withdrawals_amount" property="withdrawalsAmount"/>
+        <result column="net_value" property="netValue"/>
+        <result column="lock_margin" property="lockMargin"/>
+        <result column="float_profit" property="floatProfit"/>
+        <result column="total_profit" property="totalProfit"/>
+        <result column="rec_addr" property="recAddr"/>
+        <result column="version" property="version"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, coin_id AS coinId, status, balance_amount AS balanceAmount, freeze_amount AS
+        freezeAmount, recharge_amount AS rechargeAmount, withdrawals_amount AS withdrawalsAmount, net_value AS netValue,
+        lock_margin AS lockMargin, float_profit AS floatProfit, total_profit AS totalProfit, rec_addr AS recAddr,
+        version, last_update_time AS lastUpdateTime, created
+    </sql>
+
+    <!-- 冻结账户资金 -->
+    <update id="lockAmount">
+        UPDATE `account` SET
+        balance_amount = balance_amount - #{amount},
+        freeze_amount = freeze_amount + #{amount}
+        WHERE id = #{accountId}
+        <![CDATA[
+        AND balance_amount >= #{amount}
+        ]]>
+    </update>
+
+    <!-- 解冻账户资金 -->
+    <update id="unlockAmount">
+        UPDATE `account` SET
+        balance_amount = balance_amount + #{amount},
+        freeze_amount = freeze_amount - #{amount}
+        WHERE id = #{accountId}
+        <![CDATA[
+        AND freeze_amount >= #{amount}
+        ]]>
+    </update>
+
+    <!-- 扣减账户资金 -->
+    <update id="subtractAmount">
+        UPDATE `account` SET
+        balance_amount = balance_amount - #{amount}
+        WHERE id = #{accountId}
+        <![CDATA[
+        AND balance_amount >= #{amount}
+        ]]>
+    </update>
+</mapper>

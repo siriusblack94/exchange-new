@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.CoinWithdrawMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.CoinWithdraw">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="coin_type" property="coinType"/>
+        <result column="address" property="address"/>
+        <result column="step" property="step"/>
+        <result column="status" property="status"/>
+        <result column="txid" property="txid"/>
+        <result column="num" property="num"/>
+        <result column="fee" property="fee"/>
+        <result column="mum" property="mum"/>
+        <result column="type" property="type"/>
+        <result column="block_num" property="blockNum"/>
+        <result column="remark" property="remark"/>
+        <result column="wallet_mark" property="walletMark"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id,
+        user_id AS userId,
+        coin_id AS coinId,
+        coin_name AS coinName,
+        coin_type AS coinType,
+        address,
+        step,
+        status,
+        txid,
+        num,
+        fee,
+        mum,
+        type,
+        block_num AS blockNum,
+        remark,
+        wallet_mark AS walletMark,
+        audit_time AS auditTime,
+        last_update_time AS lastUpdateTime,
+        created
+    </sql>
+
+    <sql id="Page_Column_List">
+        a.id,
+        a.user_id AS userId,
+        a.coin_id AS coinId,
+        a.coin_name AS coinName,
+        a.coin_type AS coinType,
+        a.address,
+        a.step,
+        a.status,
+        a.txid,
+        a.num,
+        a.fee,
+        a.mum,
+        a.type,
+        a.block_num AS blockNum,
+        a.remark,
+        a.wallet_mark AS walletMark,
+        a.audit_time AS auditTime,
+        a.last_update_time AS lastUpdateTime,
+        a.created,
+        a.wallet_mark AS walletMark,
+        b.username AS userName,
+        b.mobile AS mobile
+
+    </sql>
+
+    <select id="selectListPage" resultType="com.blockeng.admin.entity.CoinWithdraw">
+        SELECT
+        <include refid="Page_Column_List"/>
+        FROM coin_withdraw a
+        left JOIN `user` b ON a.user_id = b.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY a.created DESC
+    </select>
+
+    <select id="countByDateAndUidStrs" resultType="java.lang.Integer">
+        SELECT count(0) FROM coin_withdraw
+        WHERE DATE_FORMAT(created,"%Y-%m-%d") = DATE_FORMAT(#{countDate},"%Y-%m-%d")
+        AND user_id IN(#{uidStrs})
+        <if test="status > 0 ">
+            AND status = #{status}
+        </if>
+    </select>
+
+
+    <!--提现金额，到账金额，提现币种，提现笔数，提现用户数 ，提现时间 统计-->
+    <select id="selectCountMain" resultType="com.blockeng.admin.dto.CoinWithdrawalsCountDTO">
+        SELECT
+        sum(c.num) sumNum,
+        sum(c.mum) sumMum,
+        COUNT(c.id) counts,
+        count(DISTINCT c.user_id) userCounts,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        coin_withdraw c
+        WHERE
+        1=1
+        <if test=" startTime!=null and startTime!='' ">
+            <![CDATA[ and c.created >= #{startTime} ]]>
+        </if>
+        <if test=" endTime!=null and endTime!='' ">
+            <![CDATA[ and c.created <= #{endTime} ]]>
+        </if>
+        <!--<if test=" coinId !=null and coinId!='' ">
+            and c.coin_id= #{coinId}
+        </if>-->
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d")
+        ORDER BY created DESC
+    </select>
+    <!--成功笔数，充值时间-->
+    <select id="selectValidCounts" resultType="com.blockeng.admin.dto.CoinWithdrawalsCountDTO">
+        SELECT validCounts,created from (
+        SELECT
+        COUNT(c.id) validCounts,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        coin_withdraw c
+        WHERE
+        c.`status` = 3
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d")
+        )b
+        WHERE created IN
+        <foreach collection="createds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+    </select>
+    <!--用户数，用户id，充值时间-->
+    <select id="selectUserCt" resultType="com.blockeng.admin.dto.CoinWithdrawalsCountDTO">
+        SELECT userCt,userId,created from ( SELECT
+        count(c.user_id) userCt,
+        c.user_id as userId,
+        DATE_FORMAT(c.created, "%Y-%m-%d") AS created
+        FROM
+        coin_withdraw c
+        GROUP BY
+        DATE_FORMAT(c.created, "%Y-%m-%d"),
+        c.user_id
+        )b
+        WHERE created IN
+        <foreach collection="createds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectAmountByCoinId" resultType="java.math.BigDecimal">
+        SELECT SUM( `num`)  FROM `coin_withdraw` WHERE `coin_id` =#{id} AND `status` =1
+    </select>
+
+
+    <select id="selectCoinWithdrawFreeze" resultType="com.blockeng.admin.entity.AccountFreeze">
+         SELECT u.flag AS userFlag,SUM(c.`num`+c.`fee`) AS freeze
+         FROM `coin_withdraw` c
+         LEFT JOIN user u
+         ON c.`user_id` =u.`id`
+         WHERE c.`coin_id` =#{coinId}
+         and c.`status` in (0,4,5)
+         <if test=" userFlag!=null and userFlag!='' ">
+             and u.`flag` in (#{userFlag})
+         </if>
+         GROUP BY u.`flag`;
+    </select>
+
+    <select id="selectDigitalCoinWithdrawStatistics" resultType="com.blockeng.admin.entity.DigitalCoinWithdrawStatistics">
+        SELECT
+        c.user_id AS userId,SUM(c.num) AS withdrawCount,SUM(c.fee) AS fee,SUM(c.num-c.fee) AS realWithdrawCount,COUNT(1) AS withdrawTimes
+        FROM coin_withdraw c
+        WHERE c.status=1
+        AND coin_id=#{coinId}
+        AND audit_time BETWEEN #{startTime} AND #{endTime}
+        <if test=" userId!=null and userId!='' ">
+            AND c.user_id=#{userId}
+        </if>
+        GROUP BY c.user_id
+    </select>
+
+    <select id="countDigitalCoinWithdrawCountsAndTimes" resultType="java.util.HashMap">
+        SELECT
+        SUM(c.num) AS withdrawCount,SUM(c.fee) AS fee,SUM(c.num-c.fee) AS realWithdrawCount,COUNT(1) AS withdrawTimes,COUNT(DISTINCT(c.user_id)) AS total
+        FROM coin_withdraw c
+        WHERE c.status=1
+        AND coin_id=#{coinId}
+        AND audit_time BETWEEN #{startTime} AND #{endTime}
+        <if test=" userId!=null and userId!='' ">
+            AND c.user_id=#{userId}
+        </if>
+    </select>
+
+    <select id="selectCoinWithdrawGroupCoin" resultType="java.util.HashMap">
+       SELECT c.`coin_id` AS coinId,SUM(c.`num`) AS num
+       FROM `coin_withdraw` c
+       WHERE c.`user_id`=#{userId}
+       AND c.`status`=#{status}
+       GROUP BY c.`coin_id`
+    </select>
+
+    <select id="selectCoinWithdrawFreezeGroupCoin" resultType="java.util.HashMap">
+        SELECT c.`coin_id` AS coinId,SUM(c.`num`) AS num
+        FROM `coin_withdraw` c
+        WHERE c.`user_id`=#{userId}
+        AND c.`status`
+        in (#{status})
+        GROUP BY c.`coin_id`
+    </select>
+</mapper>

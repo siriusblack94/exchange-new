@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.PointsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.Points">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="type" property="type"/>
+        <result column="count" property="count"/>
+        <result column="plus_or_minus" property="plusOrMinus"/>
+        <result column="sign" property="sign"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="status" property="status"/>
+        <result column="message" property="message"/>
+        <result column="remark" property="remark"/>
+        <result column="returnurl" property="returnurl"/>
+        <result column="created" property="created"/>
+        <result column="email" property="email"/>
+        <result column="mobile" property="mobile"/>
+        <result column="real_name" property="realName"/>
+        <result column="username" property="username"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        d.*,
+        u.email,u.mobile,u.real_name,u.username
+    </sql>
+    <select id="selectListPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from  mine_pool d
+        left join  user u on d.create_user=u.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+
+    </select>
+</mapper>

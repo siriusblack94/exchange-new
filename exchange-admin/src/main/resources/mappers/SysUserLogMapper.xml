@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.SysUserLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.SysUserLog">
+        <id column="id" property="id"/>
+        <result column="group" property="group"/>
+        <result column="user_id" property="userId"/>
+        <result column="type" property="type"/>
+        <result column="method" property="method"/>
+        <result column="params" property="params"/>
+        <result column="time" property="time"/>
+        <result column="ip" property="ip"/>
+        <result column="description" property="description"/>
+        <result column="remark" property="remark"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, group, user_id AS userId, type, method, params, time, ip, description, remark, created
+    </sql>
+
+
+    <select id="selectListPage" resultType="com.blockeng.admin.dto.SysUserLogDTO">
+        SELECT
+        sl.id,
+        sl.description,
+        sl.`group`,
+        sl.ip,
+        sl.method,
+        sl.params,
+        sl.remark,
+        sl.time,
+        sl.type,
+        sl.user_id,
+        sl.created,
+        su.username
+        FROM
+        sys_user_log sl
+        LEFT JOIN sys_user su ON sl.user_id = su.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY sl.created DESC
+    </select>
+
+</mapper>

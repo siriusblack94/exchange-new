@@ -1,0 +1,43 @@
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    enabled: true
+    serviceUrl:
+      defaultZone: http://eureka:qjYCYJ2mGPfXycTTTmCnoQ1KvHno5kGg@192.168.0.180:8761/eureka
+  instance:
+    prefer-ip-address: true
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+        timeout:
+          enabled: false
+logging:
+  config: classpath:log4j2.xml
+ribbon:
+  ConnectTimeout: 60000
+  ReadTimeout: 60000
+server:
+  port: 8080
+spring:
+  application:
+    name: exchange-gateway
+  jmx:
+    enabled: false
+  mvc:
+    async:
+      request-timeout: 10s
+  cloud:
+    gateway:
+      locator:
+        enabled: false
+      default-filters:
+      - AddResponseHeader=X-Response-Default-Foo, Default-Bar

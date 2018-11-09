@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.wallet.mapper.CoinServerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.wallet.entity.CoinServer">
+        <id column="id" property="id"/>
+        <result column="rpc_ip" property="rpcIp"/>
+        <result column="rpc_port" property="rpcPort"/>
+        <result column="running" property="running"/>
+        <result column="wallet_number" property="walletNumber"/>
+        <result column="mark" property="mark"/>
+        <result column="real_number" property="realNumber"/>
+        <result column="coin_name" property="coinName"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, rpc_ip AS rpcIp, rpc_port AS rpcPort, running AS running, wallet_number AS walletNumber,mark AS mark,
+        real_number AS realNumber, coin_name AS coinName,last_update_time AS lastUpdateTime, created
+    </sql>
+
+</mapper>

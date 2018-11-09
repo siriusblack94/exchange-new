@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.PoolDividendAccountMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.PoolDividendAccount">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="reward_amount" property="rewardAmount"/>
+        <result column="pri_month_total_mine" property="priMonthTotalMine"/>
+        <result column="unlock_amount" property="unlockAmount"/>
+        <result column="lock_amount" property="lockAmount"/>
+        <result column="unlock_date" property="unlockDate"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, reward_amount AS rewardAmount,
+        unlock_amount as unlockAmount, lock_amount as lockAmount,
+        unlock_date as unlockDate,created,last_update_time as lastUpdateTime
+    </sql>
+
+    <select id="selectTotal" resultType="com.blockeng.mining.dto.PoolDividendTotalAccountDTO">
+        SELECT COALESCE(SUM(`reward_amount`),0) AS totalRewardAmount ,
+       COALESCE(SUM(`unlock_amount`),0)  AS totalUnlockAmount ,
+       COALESCE(SUM(`lock_amount`),0)   AS totalLockAmount FROM `pool_dividend_account`
+        WHERE `user_id` = #{user_id}
+    </select>
+
+
+</mapper>

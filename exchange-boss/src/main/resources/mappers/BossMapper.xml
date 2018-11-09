@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.boss.mapper.BossMapper">
+
+    <!-- 保存成交订单 -->
+    <insert id="saveDealOrder" parameterType="com.blockeng.boss.entity.TurnoverOrder" useGeneratedKeys="true"
+            keyColumn="id" keyProperty="id">
+        INSERT INTO turnover_order(market_id, trade_type, symbol, market_name,
+        sell_user_id, sell_coin_id, sell_order_id, sell_price, sell_fee_rate, sell_volume,
+        buy_user_id, buy_coin_id, buy_order_id, buy_volume, buy_price, buy_fee_rate,
+        order_id, amount, price, volume, deal_sell_fee, deal_sell_fee_rate, deal_buy_fee, deal_buy_fee_rate, status)
+        VALUES (#{marketId}, #{tradeType}, #{symbol}, #{marketName},
+        #{sellUserId}, #{sellCoinId}, #{sellOrderId}, #{sellPrice}, #{sellFeeRate}, #{sellVolume},
+        #{buyUserId}, #{buyCoinId}, #{buyOrderId}, #{buyVolume}, #{buyPrice}, #{buyFeeRate},
+        #{orderId}, #{amount}, #{price}, #{volume}, #{dealSellFee}, #{dealSellFeeRate}, #{dealBuyFee},
+        #{dealBuyFeeRate}, #{status})
+    </insert>
+
+    <!-- 批量增加资金账户流水 -->
+    <insert id="batchAddAccountDetail" parameterType="java.util.List">
+        INSERT INTO account_detail(user_id, coin_id, account_id, ref_account_id, order_id, direction, business_type,
+        amount, fee, remark) values
+        <foreach collection="list" item="detail" index="index" separator=",">
+            (#{detail.userId},
+            #{detail.coinId},
+            #{detail.accountId},
+            #{detail.refAccountId},
+            #{detail.orderId},
+            #{detail.direction},
+            #{detail.businessType},
+            #{detail.amount},
+            #{detail.fee},
+            #{detail.remark})
+        </foreach>
+    </insert>
+
+    <!-- 撮合成交后更新委托买单 -->
+    <update id="modifyEntrustBuyOrder">
+        UPDATE `entrust_order` SET
+        deal = deal + #{dealVolume},
+        freeze = price * (volume - deal) * (1 + fee_rate),
+        status = (case when volume - deal = 0 then 1 else 0 end)
+        WHERE id = #{orderId}
+        <![CDATA[
+        AND volume >= deal + #{dealVolume}
+
+        ]]>
+    </update>
+
+    <!-- 撮合成交后更新委托卖单 -->
+    <update id="modifyEntrustSellOrder">
+        UPDATE `entrust_order` SET
+        deal = deal + #{dealVolume},
+        freeze = volume - deal,
+        status = (case when volume - deal = 0 then 1 else 0 end)
+        WHERE id = #{orderId}
+        <![CDATA[
+        AND volume >= deal + #{dealVolume}
+
+        ]]>
+    </update>
+
+    <!-- 扣减账户资金 -->
+    <update id="subtractAmount">
+        UPDATE `account` SET
+        freeze_amount = freeze_amount - #{amount},
+        balance_amount = balance_amount + #{returnAmount}
+        WHERE id = #{accountId}
+        <![CDATA[
+        AND freeze_amount >= #{amount}
+        ]]>
+    </update>
+
+    <!-- 增加账户资金 -->
+    <update id="addAmount">
+        UPDATE `account` SET balance_amount = balance_amount + #{amount} WHERE id = #{accountId}
+    </update>
+
+    <!-- 根据委托卖单和委托买单查询成交记录数量 -->
+    <select id="queryDealOrderCount" resultType="java.lang.Integer">
+        SELECT count(1) FROM turnover_order WHERE sell_order_id = #{sellOrderId} AND buy_order_id = #{buyOrderId}
+    </select>
+
+    <!-- 查询交易对币种 -->
+    <select id="querySymbol" resultType="com.blockeng.boss.dto.Symbol">
+        SELECT buy_coin_id AS buyCoinId, sell_coin_id AS sellCoinId FROM market WHERE id = #{marketId}
+    </select>
+
+    <!-- 查询用户资金账户 -->
+    <select id="queryAccount" resultType="com.blockeng.boss.entity.Account">
+        SELECT
+        id,
+        user_id AS userId,
+        coin_id AS coinId,
+        status,
+        balance_amount balanceAmount,
+        freeze_amount freee_amount
+        FROM account
+        WHERE user_id = #{userId}
+        AND coin_id = #{coinId}
+    </select>
+
+    <!-- 解冻账户资金 -->
+    <update id="unlockAmount">
+        UPDATE `account` SET
+        balance_amount = balance_amount + #{amount},
+        freeze_amount = freeze_amount - #{amount}
+        WHERE id = #{accountId}
+        <![CDATA[
+        AND freeze_amount >= #{amount}
+        ]]>
+    </update>
+
+</mapper>

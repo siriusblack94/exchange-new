@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.mining.mapper.AssetSnapshotDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.mining.entity.AssetSnapshotDetail">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="balance_amount" property="balanceAmount"/>
+        <result column="freeze_amount" property="freezeAmount"/>
+        <result column="balance" property="balance"/>
+        <result column="price" property="price"/>
+        <result column="snap_time" property="snapTime"/>
+        <result column="date" property="date"/>
+        <result column="created" property="created"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, coin_id AS coinId, balance_amount AS balanceAmount,
+        freeze_amount AS freezeAmount,balance AS balance,price,snap_time as snapTime,`date`, created
+    </sql>
+
+
+</mapper>

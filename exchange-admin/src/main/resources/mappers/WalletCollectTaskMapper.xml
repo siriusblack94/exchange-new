@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.WalletCollectTaskMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.WalletCollectTask">
+        <id column="id" property="id"/>
+        <result column="coin_id" property="coinId"/>
+        <result column="from_address" property="fromAddress"/>
+        <result column="coin_type" property="coinType"/>
+        <result column="user_id" property="userId"/>
+        <result column="txid" property="txid"/>
+        <result column="amount" property="amount"/>
+        <result column="mark" property="mark"/>
+        <result column="status" property="status"/>
+        <result column="to_address" property="toAddress"/>
+        <result column="coin_name" property="coinName"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, coin_id AS coinId, from_address AS fromAddress,coin_type as coinType, user_id AS userId, txid, amount, mark,
+        status, to_address AS toAddress, coin_name AS coinName
+    </sql>
+
+</mapper>

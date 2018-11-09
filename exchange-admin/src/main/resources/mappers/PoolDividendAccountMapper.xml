@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blockeng.admin.mapper.PoolDividendAccountMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.blockeng.admin.entity.PoolDividendAccount">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="reward_amount" property="rewardAmount"/>
+        <result column="pri_month_total_mine" property="priMonthTotalMine"/>
+        <result column="unlock_amount" property="unlockAmount"/>
+        <result column="lock_amount" property="lockAmount"/>
+        <result column="unlock_date" property="unlockDate"/>
+        <result column="created" property="created"/>
+        <result column="last_update_time" property="lastUpdateTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, user_id AS userId, reward_amount AS rewardAmount,
+        unlock_amount as unlockAmount, lock_amount as lockAmount,
+        unlock_date as unlockDate,created,last_update_time as lastUpdateTime
+    </sql>
+
+    <resultMap id="selectListResultMap" type="com.blockeng.admin.dto.PoolDividendAccountDTO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="lock_amount" property="lockAmount"/>
+        <result column="pri_month_total_mine" property="priMonthTotalMine"/>
+        <result column="reward_amount" property="rewardAmount"/>
+        <result column="unlock_amount" property="unlockAmount"/>
+        <result column="mobile" property="mobile"/>
+        <result column="real_name" property="realName"/>
+        <result column="username" property="username"/>
+        <result column="unlock_date" property="unlockDate"/>
+    </resultMap>
+
+    <select id="selectPoolDividendAccountListPage" resultMap="selectListResultMap">
+        select u.username,u.mobile,u.real_name,d.user_id,max(d.unlock_date) as unlock_date,
+        SUM(d.lock_amount) AS lock_amount ,SUM(d.pri_month_total_mine) AS pri_month_total_mine,
+        SUM(d.reward_amount) AS reward_amount ,SUM(d.unlock_amount) AS unlock_amount
+        from pool_dividend_account d
+        LEFT JOIN `user` u on d.user_id=u.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        GROUP BY d.user_id
+    </select>
+    <select id="selectPoolDividendAccountDetailList" resultMap="selectListResultMap">
+        select u.username,u.mobile,u.real_name,d.user_id,d.unlock_date,
+        d.lock_amount,d.pri_month_total_mine,d.reward_amount,d.unlock_amount
+        from pool_dividend_account d
+        LEFT JOIN `user` u on d.user_id=u.id
+        <where>
+            ${ew.sqlSegment}
+        </where>
+        ORDER BY d.created DESC
+
+    </select>
+
+
+</mapper>

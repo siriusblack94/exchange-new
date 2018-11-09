@@ -1,0 +1,1390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/DividendAccountController.java" line="134" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1644a0f9-ba9c-4396-8965-d643909ece1d" name="Default" comment="bxx挖矿最全">
+      <change afterPath="$PROJECT_DIR$/exchange-mining.iml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="exchange-mining" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="PoolDividendRecordController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PoolDividendRecordController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="521">
+              <caret line="137" column="62" lean-forward="true" selection-start-line="137" selection-start-column="62" selection-end-line="137" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PoolDividendRecordService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/PoolDividendRecordService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="477">
+              <caret line="50" column="11" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PoolDividendRecordServiceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/PoolDividendRecordServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="168" column="18" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlantCoinDividendAccountController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PlantCoinDividendAccountController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="543">
+              <caret line="64" column="70" lean-forward="true" selection-start-line="64" selection-start-column="70" selection-end-line="64" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MinePoolController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MinePoolController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1950">
+              <caret line="85" column="27" lean-forward="true" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MineDataController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MineDataController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-510">
+              <caret line="76" column="30" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="123">
+              <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spring-boot-starter-webflux-2.0.3.RELEASE.pom" pinned="false" current-in-tab="true">
+        <entry file="file://D:/local_repo/org/springframework/boot/spring-boot-starter-webflux/2.0.3.RELEASE/spring-boot-starter-webflux-2.0.3.RELEASE.pom">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-747" />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spring-cloud-starter-config-2.0.0.RELEASE.pom" pinned="false" current-in-tab="false">
+        <entry file="file://D:/local_repo/org/springframework/cloud/spring-cloud-starter-config/2.0.0.RELEASE/spring-cloud-starter-config-2.0.0.RELEASE.pom">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="9" column="43" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="43" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MineController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MineController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="65" column="46" lean-forward="true" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>DividendRecordServiceImpl</find>
+      <find>Base_Column_List</find>
+      <find>plant_coin_dividend_record_temp</find>
+      <find>PoolDividendRecordServiceImpl</find>
+      <find>setPage</find>
+      <find>平均持币量为</find>
+      <find>totalCirculation</find>
+      <find>setCurrent</find>
+      <find>priWeekTotalMine</find>
+      <find>/reco</find>
+      <find>50030</find>
+      <find>mobile</find>
+      <find>selectPage</find>
+      <find>当前用户不是矿主</find>
+      <find>userName</find>
+      <find>不存在前一天的挖矿信息</find>
+      <find>当前矿主持有的币</find>
+      <find>前一天账户余额不足</find>
+      <find>MINE_RATE</find>
+      <find>没有成员</find>
+      <find>查询邀请用户数据</find>
+      <find>/month</find>
+      <find>/total</find>
+      <find>未配置当前交易对</find>
+      <find>plant_coin_dividend_account</find>
+      <find>PlantCoinDividendAccount</find>
+      <find>mine_pool_member</find>
+      <find>MinePoolMember</find>
+      <find>pool/record</find>
+      <find>/dividend/record</find>
+    </findStrings>
+    <dirStrings>
+      <dir>D:\workspace\exchange-mining\src</dir>
+      <dir>D:\workspace\exchange-mining\src\main\java\com\blockeng\mining</dir>
+      <dir>D:\workspace\exchange-mining\src\main\resources\mappers</dir>
+      <dir>D:\workspace\exchange-mining</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="gt210" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/AssetSnapshotDetailService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/AccountService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/AccountServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/mapper/AccountMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/AssetSnapshotDetailServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PrivatePlacementController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/entity/DividendAccount.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/PrivatePlacementReleaseRecordServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/entity/DividendRecordDetail.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/AssetSnapshotServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/MinePoolServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/PoolDividendAccountService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/entity/PoolDividendAccount.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mappers/PoolDividendAccountMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/entity/DividendReleaseRecord.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/DividendAccountServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/bootstrap.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/mapper/DividendAccountMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/UserServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/mapper/UserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/PoolDividendRecordService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mappers/AccountMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mappers/DividendAccountMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mappers/MiningDetailMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/task/wenjian.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/PoolDividendAccountServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PoolDividendAccountController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MineDataController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/task/MiningTask.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mappers/MineMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/MineServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mappers/DividendRecordMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/DividendRecordServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/DividendRecordService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/mapper/DividendRecordMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/PlantCoinDividendRecordServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MinePoolController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/utils/TimeUtils.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/entity/DividendRecordDetailDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/DividendRecordDetailServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/DividendRecordDetailService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/DividendAccountController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/mapper/DividendRecordDetailMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/dto/DividendRecordDetailDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mappers/DividendRecordDetailMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PoolDividendRecordController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/dto/PoolUserHoldCoinDTO.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/PoolDividendRecordServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MineController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\local_repo" />
+        <option name="mavenHome" value="E:/soft/apache-maven-3.5.4" />
+        <option name="userSettingsFile" value="E:\soft\apache-maven-3.5.4\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="exchange-mining" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="exchange-mining" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="138" />
+    <option name="y" value="53" />
+    <option name="width" value="1726" />
+    <option name="height" value="925" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="blockeng" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="blockeng" type="462c0819:PsiDirectoryNode" />
+              <item name="mining" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="blockeng" type="462c0819:PsiDirectoryNode" />
+              <item name="mining" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="blockeng" type="462c0819:PsiDirectoryNode" />
+              <item name="mining" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="exchange-mining" type="b2602c69:ProjectViewProjectNode" />
+              <item name="exchange-mining" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace\exchange-mining\src\main\java\com\blockeng\mining\task" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.MiningApplication">
+    <configuration name="DividendAccountController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.blockeng.mining.web.DividendAccountController" />
+      <module name="exchange-mining" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.blockeng.mining.web.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="wenjian" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.blockeng.mining.task.wenjian" />
+      <module name="exchange-mining" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.blockeng.mining.task.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="MiningApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="exchange-mining" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.blockeng.mining.MiningApplication" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.MiningApplication" />
+      <item itemvalue="Application.wenjian" />
+      <item itemvalue="Application.DividendAccountController" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DividendAccountController" />
+        <item itemvalue="Application.wenjian" />
+        <item itemvalue="Application.DividendAccountController" />
+        <item itemvalue="Application.wenjian" />
+        <item itemvalue="Application.DividendAccountController" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1644a0f9-ba9c-4396-8965-d643909ece1d" name="Default" comment="" />
+      <created>1535961777194</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1535961777194</updated>
+      <workItem from="1535961778841" duration="97599000" />
+      <workItem from="1536378184875" duration="26882000" />
+      <workItem from="1536489343683" duration="16375000" />
+      <workItem from="1536549862735" duration="75017000" />
+      <workItem from="1536712977118" duration="42503000" />
+      <workItem from="1536840774013" duration="86388000" />
+      <workItem from="1538213325519" duration="7056000" />
+      <workItem from="1538965385110" duration="708000" />
+      <workItem from="1539225167459" duration="5619000" />
+      <workItem from="1539309559070" duration="75867000" />
+      <workItem from="1539746725027" duration="23922000" />
+      <workItem from="1540174272912" duration="47038000" />
+      <workItem from="1540433762051" duration="13863000" />
+      <workItem from="1540863958800" duration="86000" />
+      <workItem from="1540864051286" duration="10000" />
+      <workItem from="1540864070737" duration="12000" />
+      <workItem from="1540864109188" duration="15079000" />
+      <workItem from="1540954938699" duration="9309000" />
+      <workItem from="1541043717059" duration="20026000" />
+      <workItem from="1541398969753" duration="6164000" />
+      <workItem from="1541577802224" duration="4233000" />
+    </task>
+    <task id="LOCAL-00001" summary="挖矿更改">
+      <created>1536636677609</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1536636677609</updated>
+    </task>
+    <task id="LOCAL-00002" summary="挖矿更改单份手续费问题">
+      <created>1536637195100</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1536637195100</updated>
+    </task>
+    <task id="LOCAL-00003" summary="挖矿更新">
+      <created>1536672661620</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1536672661620</updated>
+    </task>
+    <task id="LOCAL-00004" summary="挖矿按昨日剩余资产">
+      <created>1536737272621</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1536737272621</updated>
+    </task>
+    <task id="LOCAL-00005" summary="真实用户账户资产求和">
+      <created>1536740119616</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1536740119616</updated>
+    </task>
+    <task id="LOCAL-00006" summary="真实用户账户资产求和">
+      <created>1536740361780</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1536740361780</updated>
+    </task>
+    <task id="LOCAL-00007" summary="真实用户账户资产求和">
+      <created>1537012898309</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1537012898309</updated>
+    </task>
+    <task id="LOCAL-00008" summary="bxx">
+      <created>1537013285386</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1537013285386</updated>
+    </task>
+    <task id="LOCAL-00009" summary="bxx">
+      <created>1537095392270</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1537095392270</updated>
+    </task>
+    <task id="LOCAL-00010" summary="hbank">
+      <created>1537096325985</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1537096325985</updated>
+    </task>
+    <task id="LOCAL-00011" summary="hbank">
+      <created>1537096793994</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1537096793994</updated>
+    </task>
+    <task id="LOCAL-00012" summary="bxx">
+      <created>1537158755553</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1537158755553</updated>
+    </task>
+    <task id="LOCAL-00013" summary="hbank">
+      <created>1537159060714</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1537159060714</updated>
+    </task>
+    <task id="LOCAL-00014" summary="hbank">
+      <created>1537171374078</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1537171374078</updated>
+    </task>
+    <task id="LOCAL-00015" summary="hbank">
+      <created>1537172331900</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1537172331900</updated>
+    </task>
+    <task id="LOCAL-00016" summary="hbank">
+      <created>1537189801754</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1537189801754</updated>
+    </task>
+    <task id="LOCAL-00017" summary="bxx">
+      <created>1537193020147</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1537193020147</updated>
+    </task>
+    <task id="LOCAL-00018" summary="bxx">
+      <created>1537237047515</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1537237047515</updated>
+    </task>
+    <task id="LOCAL-00019" summary="hbank">
+      <created>1537237740544</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1537237740544</updated>
+    </task>
+    <task id="LOCAL-00020" summary="hbank">
+      <created>1537928942427</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1537928942427</updated>
+    </task>
+    <task id="LOCAL-00021" summary="gt210">
+      <created>1539425155884</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1539425155884</updated>
+    </task>
+    <task id="LOCAL-00022" summary="gt210">
+      <created>1539432338522</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1539432338522</updated>
+    </task>
+    <task id="LOCAL-00023" summary="gt210">
+      <created>1539854092370</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1539854092370</updated>
+    </task>
+    <task id="LOCAL-00024" summary="挖矿最全">
+      <created>1539949174227</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1539949174227</updated>
+    </task>
+    <task id="LOCAL-00025" summary="bxx挖矿最全">
+      <created>1540209917010</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1540209917011</updated>
+    </task>
+    <task id="LOCAL-00026" summary="bxx挖矿最全">
+      <created>1540259362857</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1540259362857</updated>
+    </task>
+    <task id="LOCAL-00027" summary="挖矿最全">
+      <created>1540349981195</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1540349981195</updated>
+    </task>
+    <task id="LOCAL-00028" summary=" gt210">
+      <created>1540547473200</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1540547473200</updated>
+    </task>
+    <task id="LOCAL-00029" summary="bxx挖矿完善">
+      <created>1540865284871</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1540865284871</updated>
+    </task>
+    <task id="LOCAL-00030" summary="gt210挖矿">
+      <created>1540865744836</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1540865744836</updated>
+    </task>
+    <task id="LOCAL-00031" summary="bxx挖矿最全">
+      <created>1540865850242</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1540865850242</updated>
+    </task>
+    <task id="LOCAL-00032" summary="bxx挖矿最全">
+      <created>1540894081785</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1540894081785</updated>
+    </task>
+    <task id="LOCAL-00033" summary="bxx挖矿最全">
+      <created>1541062053115</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1541062053115</updated>
+    </task>
+    <task id="LOCAL-00034" summary="bxx挖矿最全">
+      <created>1541063524317</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1541063524317</updated>
+    </task>
+    <task id="LOCAL-00035" summary="bxx挖矿最全">
+      <created>1541063969187</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1541063969187</updated>
+    </task>
+    <task id="LOCAL-00036" summary="bxx挖矿最全">
+      <created>1541126390139</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1541126390139</updated>
+    </task>
+    <task id="LOCAL-00037" summary="bxx挖矿最全">
+      <created>1541126711956</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1541126711956</updated>
+    </task>
+    <task id="LOCAL-00038" summary="bxx挖矿最全">
+      <created>1541127345799</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1541127345799</updated>
+    </task>
+    <task id="LOCAL-00039" summary="bxx挖矿最全">
+      <created>1541127723027</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1541127723027</updated>
+    </task>
+    <task id="LOCAL-00040" summary="bxx挖矿最全">
+      <created>1541149446622</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1541149446622</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="573756000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5026652" side_tool="true" weight="0.21948488" />
+      <window_info active="true" anchor="right" id="Maven Projects" order="0" visible="true" weight="0.282516" />
+      <window_info anchor="bottom" id="Database Changes" order="3" show_stripe_button="false" />
+      <window_info id="Capture Tool" order="7" />
+      <window_info id="Designer" order="0" />
+      <window_info anchor="right" id="Database" order="2" weight="0.32995737" />
+      <window_info id="Structure" order="6" sideWeight="0.6266892" side_tool="true" weight="0.17750533" />
+      <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="12" weight="0.32922733" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="1" />
+      <window_info anchor="bottom" id="Java Enterprise" order="2" weight="0.32922733" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="bottom" id="Version Control" order="4" sideWeight="0.4978678" weight="0.1724524" />
+      <window_info anchor="bottom" id="Run" order="8" sideWeight="0.49733475" weight="0.33594626" />
+      <window_info anchor="bottom" id="Spring" order="0" weight="0.32922733" />
+      <window_info anchor="bottom" id="Terminal" order="1" weight="0.32922733" />
+      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.3733108" visible="true" weight="0.14232409" />
+      <window_info anchor="right" id="Bean Validation" order="5" weight="0.32995737" />
+      <window_info id="Web" order="4" side_tool="true" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info id="Favorites" order="3" sideWeight="0.6266892" side_tool="true" weight="0.17750533" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="7" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="10" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.15901455" />
+      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="6" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="挖矿更改" />
+    <MESSAGE value="挖矿更改单份手续费问题" />
+    <MESSAGE value="挖矿更新" />
+    <MESSAGE value="挖矿按昨日剩余资产" />
+    <MESSAGE value="真实用户账户资产求和" />
+    <MESSAGE value="bxx" />
+    <MESSAGE value="hbank" />
+    <MESSAGE value="gt210" />
+    <MESSAGE value="挖矿最全" />
+    <MESSAGE value=" gt210" />
+    <MESSAGE value="bxx挖矿完善" />
+    <MESSAGE value="gt210挖矿" />
+    <MESSAGE value="bxx挖矿最全" />
+    <option name="LAST_COMMIT_MESSAGE" value="bxx挖矿最全" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/MineDataServiceImpl.java</url>
+          <line>117</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/MineDataServiceImpl.java</url>
+          <line>133</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MineController.java</url>
+          <line>67</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="13" />
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/PoolDividendAccountServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-393">
+          <caret line="49" column="18" selection-start-line="49" selection-start-column="18" selection-end-line="49" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/local_repo/com/baomidou/mybatis-plus-extension/3.0-gamma/mybatis-plus-extension-3.0-gamma.jar!/com/baomidou/mybatisplus/extension/plugins/pagination/Page.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="16" column="23" lean-forward="true" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/handle/CalcHandle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="36" column="51" lean-forward="true" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/config/MybatisPlusConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/MiningApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="363">
+          <caret line="23" column="22" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/DividendAccountServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="54" column="36" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/entity/MinePool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1553">
+          <caret line="65" column="7" lean-forward="true" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/bootstrap.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="3" column="83" lean-forward="true" selection-start-line="3" selection-start-column="51" selection-end-line="3" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/utils/TimeUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1497">
+          <caret line="105" column="52" lean-forward="true" selection-start-line="105" selection-start-column="52" selection-end-line="105" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/MiningDetailMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="34" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/mapper/MiningDetailMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="16" column="17" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/DividendAccountMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-687" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/entity/DividendRecordDetail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="18" column="34" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/DividendRecordDetailService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="16" column="105" selection-start-line="16" selection-start-column="105" selection-end-line="16" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/mapper/DividendRecordDetailMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="18" column="39" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/dto/DividendRecordDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" selection-start-line="10" selection-end-line="10" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/dto/PlantCoinDividendDetailDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/DividendRecordDetailMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/dto/DividendRecordDetailDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="25" column="64" lean-forward="true" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/DividendRecordDetailServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/DividendAccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1129">
+          <caret line="109" column="62" selection-start-line="109" selection-start-column="62" selection-end-line="109" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/UserMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="47" column="4" selection-start-line="47" selection-start-column="4" selection-end-line="47" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/UserServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/dto/PoolUserHoldCoinDTO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="12" column="25" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/DividendRecordServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="106" column="61" selection-start-line="106" selection-start-column="61" selection-end-line="106" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/DividendRecordController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="45" column="61" selection-start-line="45" selection-start-column="61" selection-end-line="45" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2-prod.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="17" column="57" selection-start-line="17" selection-start-column="57" selection-end-line="17" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/log4j2.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-537" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/AccountMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="559">
+          <caret line="39" column="109" selection-start-line="39" selection-start-column="109" selection-end-line="39" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/AccountService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/AssetSnapshotServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="47" column="52" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/AssetSnapshotDetailServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="229">
+          <caret line="50" column="57" lean-forward="true" selection-start-line="50" selection-start-column="57" selection-end-line="50" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/AccountServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/PlantCoinDividendRecordServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2550">
+          <caret line="128" column="52" lean-forward="true" selection-start-line="128" selection-start-column="52" selection-end-line="128" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PoolDividendAccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-57">
+          <caret line="94" column="96" lean-forward="true" selection-start-line="94" selection-start-column="96" selection-end-line="94" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.2/lib/src.zip!/java.base/java/math/BigDecimal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="1504" column="22" selection-start-line="1504" selection-start-column="22" selection-end-line="1504" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mappers/MineMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/MineServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="171" column="38" lean-forward="true" selection-start-line="171" selection-start-column="38" selection-end-line="171" selection-end-column="38" />
+          <folding>
+            <element signature="e#6972#6973#0" expanded="true" />
+            <element signature="e#7035#7036#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/task/MiningTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="81" column="38" selection-start-line="81" selection-start-column="38" selection-end-line="81" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://D:/local_repo/com/baomidou/mybatis-plus-extension/3.0-gamma/mybatis-plus-extension-3.0-gamma.jar!/com/baomidou/mybatisplus/extension/service/impl/ServiceImpl.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="322" column="20" selection-start-line="322" selection-start-column="20" selection-end-line="322" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PrivatePlacementController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="633">
+          <caret line="62" column="72" lean-forward="true" selection-start-line="62" selection-start-column="72" selection-end-line="62" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/impl/PoolDividendRecordServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="168" column="18" selection-start-line="168" selection-start-column="18" selection-end-line="168" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PlantCoinDividendAccountController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="64" column="70" lean-forward="true" selection-start-line="64" selection-start-column="70" selection-end-line="64" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MinePoolController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1950">
+          <caret line="85" column="27" lean-forward="true" selection-start-line="85" selection-start-column="27" selection-end-line="85" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MineDataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-510">
+          <caret line="76" column="30" selection-start-line="76" selection-start-column="11" selection-end-line="76" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/MineController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="65" column="46" lean-forward="true" selection-start-line="65" selection-start-column="46" selection-end-line="65" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/local_repo/org/springframework/cloud/spring-cloud-starter-config/2.0.0.RELEASE/spring-cloud-starter-config-2.0.0.RELEASE.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="37" selection-end-line="9" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/service/PoolDividendRecordService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="477">
+          <caret line="50" column="11" selection-start-line="50" selection-start-column="11" selection-end-line="50" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/blockeng/mining/web/PoolDividendRecordController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="521">
+          <caret line="137" column="62" lean-forward="true" selection-start-line="137" selection-start-column="62" selection-end-line="137" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="23" column="44" lean-forward="true" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/local_repo/org/springframework/boot/spring-boot-starter-webflux/2.0.3.RELEASE/spring-boot-starter-webflux-2.0.3.RELEASE.pom">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-747" />
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>exchange-mining</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
